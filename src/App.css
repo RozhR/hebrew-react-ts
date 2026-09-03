@@ -62,7 +62,11 @@
 }
 
 .styled-dropdown {
-    background: linear-gradient(135deg, #4a5568, #2d3748);
+    background: linear-gradient(
+            135deg,
+            #4a5568,
+            #2d3748
+    );
     border-radius: 12px;
     padding: 10px 0;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
@@ -139,13 +143,7 @@
     width: 220px;
     height: 160px;
     perspective: 1000px;
-
-    /*
-       Оставляем grab/grabbing,
-       так как позже планируется drag-and-drop.
-    */
     cursor: grab;
-
     transition: all 0.4s ease;
 }
 
@@ -192,12 +190,20 @@
 }
 
 .card-front {
-    background: linear-gradient(135deg, #4a5568, #2d3748);
+    background: linear-gradient(
+            135deg,
+            #4a5568,
+            #2d3748
+    );
     color: #f7fafc;
 }
 
 .card-back {
-    background: linear-gradient(135deg, #9f7aea, #805ad5);
+    background: linear-gradient(
+            135deg,
+            #9f7aea,
+            #805ad5
+    );
     color: white;
     transform: rotateY(180deg);
 }
@@ -255,15 +261,22 @@
     width: 100%;
     max-width: 1000px;
 
-    margin: 30px auto;
+    margin: 25px auto 50px;
     padding: 0 20px;
 
     text-align: center;
 }
 
-.test-area p {
-    margin: 20px 0;
-    font-size: 18px;
+
+/* ===== НОМЕР ВОПРОСА ===== */
+
+.question-number {
+    margin: 15px 0;
+
+    font-size: 20px;
+    color: #e2e8f0;
+
+    text-align: center;
 }
 
 
@@ -271,20 +284,28 @@
 
 .progress-bar {
     width: 100%;
-    height: 20px;
+    height: 18px;
+
+    margin: 15px auto 20px;
 
     background: #4a5568;
 
     border-radius: 12px;
     overflow: hidden;
 
-    margin: 15px 0 20px;
+    box-shadow:
+            inset 0 2px 5px
+            rgba(0, 0, 0, 0.35);
 }
 
 .progress-fill {
     height: 100%;
 
-    background: linear-gradient(135deg, #805ad5, #9f7aea);
+    background: linear-gradient(
+            135deg,
+            #805ad5,
+            #9f7aea
+    );
 
     border-radius: 12px;
 
@@ -295,23 +316,48 @@
 /* ===== ТАЙМЕР ===== */
 
 .timer {
-    margin-bottom: 55px;
+    min-height: 35px;
 
-    font-size: 24px;
+    margin: 15px 0 35px;
+
+    font-size: 25px;
+    font-weight: bold;
+
     color: #f7fafc;
+
+    transition:
+            color 0.3s,
+            transform 0.3s;
+}
+
+.timer-warning {
+    color: #f56565;
+    transform: scale(1.08);
 }
 
 
 /* ===== СЛОВО НА ИВРИТЕ ===== */
 
 .test-word {
-    margin: 0 0 30px;
+    min-height: 100px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 0 35px;
 
     font-size: 5rem;
-    color: #805ad5;
+    line-height: 1.1;
 
-    text-align: center;
+    color: #9f7aea;
+
     direction: rtl;
+    text-align: center;
+
+    text-shadow:
+            0 3px 8px
+            rgba(0, 0, 0, 0.4);
 }
 
 
@@ -327,52 +373,58 @@
 
     gap: 15px;
 
-    margin-top: 20px;
+    margin: 0 auto;
 }
 
 .answer-btn {
-    flex: 0 1 auto;
+    min-width: 170px;
+    max-width: 260px;
 
-    min-width: 160px;
-    max-width: 280px;
-
-    padding: 12px 20px;
+    padding: 12px 22px;
 
     font-size: 18px;
+    line-height: 1.3;
 
     white-space: normal;
     text-align: center;
 }
 
 
-/* ===== ПРАВИЛЬНЫЙ / НЕПРАВИЛЬНЫЙ ОТВЕТ ===== */
+/* ===== СОСТОЯНИЯ ОТВЕТА ===== */
 
 .styled-btn.correct-answer {
     background: #38a169;
+
+    box-shadow:
+            0 4px 14px
+            rgba(56, 161, 105, 0.45);
 }
 
 .styled-btn.wrong-answer {
     background: #e53e3e;
+
+    box-shadow:
+            0 4px 14px
+            rgba(229, 62, 62, 0.45);
 }
 
 
 /* ===== РЕЗУЛЬТАТ ОТВЕТА ===== */
 
 .answer-result {
-    margin-top: 10px;
+    min-height: 135px;
+
+    margin-top: 20px;
+
     text-align: center;
 }
 
 .correct,
 .wrong {
-    display: block;
+    margin-top: 15px;
 
-    margin-top: 20px;
-
-    font-size: 24px;
+    font-size: 26px;
     font-weight: bold;
-
-    text-align: center;
 }
 
 .correct {
@@ -384,8 +436,10 @@
 }
 
 .correct-answer-text {
-    margin: 15px 0 !important;
-    font-size: 16px !important;
+    margin: 12px 0 15px;
+
+    font-size: 18px;
+    color: #e2e8f0;
 }
 
 
@@ -393,6 +447,105 @@
 
 .continue-btn {
     margin-top: 5px;
+    min-width: 180px;
+}
+
+
+/* =========================================================
+   ФИНАЛЬНЫЙ РЕЗУЛЬТАТ ТЕСТА
+   ========================================================= */
+
+.test-result-card {
+    width: 100%;
+    max-width: 550px;
+
+    margin: 45px auto 0;
+    padding: 35px;
+
+    background: linear-gradient(
+            135deg,
+            #4a5568,
+            #2d3748
+    );
+
+    border-radius: 16px;
+
+    box-shadow:
+            0 10px 30px
+            rgba(0, 0, 0, 0.45);
+}
+
+.test-result-title {
+    margin-bottom: 20px;
+
+    font-size: 32px;
+    color: #9f7aea;
+}
+
+.test-result-percent {
+    margin: 10px 0 20px;
+
+    font-size: 64px;
+    font-weight: bold;
+}
+
+.test-result-percent.passed {
+    color: #48bb78;
+}
+
+.test-result-percent.failed {
+    color: #f56565;
+}
+
+.test-result-text {
+    margin: 10px 0;
+
+    font-size: 20px;
+    color: #f7fafc;
+}
+
+.test-result-message {
+    margin-top: 20px;
+
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.passed-message {
+    color: #68d391;
+}
+
+.failed-message {
+    color: #fc8181;
+}
+
+
+/* =========================================================
+   АДАПТАЦИЯ ТЕСТА
+   ========================================================= */
+
+@media (max-width: 700px) {
+    .test-word {
+        font-size: 3.5rem;
+    }
+
+    .answers-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .answer-btn {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .test-result-card {
+        padding: 25px 15px;
+    }
+
+    .test-result-percent {
+        font-size: 52px;
+    }
 }
 
 
@@ -414,11 +567,17 @@
     margin: 10px auto;
     padding: 15px 20px;
 
-    background: linear-gradient(135deg, #4a5568, #2d3748);
+    background: linear-gradient(
+            135deg,
+            #4a5568,
+            #2d3748
+    );
 
     border-radius: 12px;
 
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+    box-shadow:
+            0 6px 15px
+            rgba(0, 0, 0, 0.5);
 
     transition:
             transform 0.3s,
@@ -427,7 +586,10 @@
 
 .stat-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+
+    box-shadow:
+            0 10px 25px
+            rgba(0, 0, 0, 0.6);
 }
 
 .stat-card .level-name {
@@ -459,5 +621,32 @@
 
 .stat-progress-fill {
     height: 100%;
-    transition: width 0.3s ease;
+
+    transition:
+            width 0.3s ease;
+}
+
+.test-result-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+
+    margin-top: 30px;
+}
+
+.test-result-actions .styled-btn {
+    min-width: 190px;
+}
+
+@media (max-width: 700px) {
+    .test-result-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .test-result-actions .styled-btn {
+        width: 100%;
+        max-width: 320px;
+    }
 }

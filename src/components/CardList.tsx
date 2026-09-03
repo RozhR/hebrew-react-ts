@@ -1,5 +1,7 @@
 import { useState } from "react";
+
 import Card from "./Card";
+
 import type { CardData } from "../types";
 
 type CardListProps = {
@@ -7,14 +9,20 @@ type CardListProps = {
     onStartTest: () => void;
 };
 
-function CardList({ cards, onStartTest }: CardListProps) {
-    const [shuffledCards, setShuffledCards] = useState(cards);
+function CardList({
+                      cards,
+                      onStartTest,
+                  }: CardListProps) {
+    const [shuffledCards, setShuffledCards] =
+        useState<CardData[]>(cards);
 
     const shuffleCards = () => {
         const newCards = [...shuffledCards];
 
         for (let i = newCards.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
+            const j = Math.floor(
+                Math.random() * (i + 1),
+            );
 
             [newCards[i], newCards[j]] = [
                 newCards[j],
@@ -46,12 +54,14 @@ function CardList({ cards, onStartTest }: CardListProps) {
             </div>
 
             <div className="card-container">
-                {shuffledCards.map((card, index) => (
-                    <Card
-                        key={`${card.hebrew}-${index}`}
-                        card={card}
-                    />
-                ))}
+                {shuffledCards.map(
+                    (card, index) => (
+                        <Card
+                            key={`${card.hebrew}-${index}`}
+                            card={card}
+                        />
+                    ),
+                )}
             </div>
         </>
     );
