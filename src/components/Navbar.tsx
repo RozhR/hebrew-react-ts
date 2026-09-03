@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import type { Category } from '../types'
 import { isLevelUnlocked } from '../utils/progress'
 
@@ -7,7 +8,34 @@ type MenuCategory = {
     levels: number
 }
 
-function Navbar() {
+type NavbarProps = {
+    onSelectLevel: (
+        category: Category,
+        level: number,
+    ) => void
+}
+
+function Navbar({ onSelectLevel }: NavbarProps) {
+    const [, setUpdate] = useState(0)
+
+    useEffect(() => {
+        const handleLevelsUpdated = () => {
+            setUpdate((prev) => prev + 1)
+        }
+
+        window.addEventListener(
+            'levelsUpdated',
+            handleLevelsUpdated,
+        )
+
+        return () => {
+            window.removeEventListener(
+                'levelsUpdated',
+                handleLevelsUpdated,
+            )
+        }
+    }, [])
+
     const categories: MenuCategory[] = [
         {
             title: 'Глаголы',
@@ -58,16 +86,22 @@ function Navbar() {
                                 return (
                                     <li key={level}>
                                         {unlocked ? (
-                                            <a href="#">
-                                                Уровень {level}
-                                            </a>
-                                        ) : (
-                                            <a
-                                                href="#"
-                                                className="locked-link"
+                                            <button
+                                                type="button"
+                                                className="level-link"
+                                                onClick={() =>
+                                                    onSelectLevel(
+                                                        category.category,
+                                                        level,
+                                                    )
+                                                }
                                             >
+                                                Уровень {level}
+                                            </button>
+                                        ) : (
+                                            <span className="locked-link">
                                                 🔒 Уровень {level}
-                                            </a>
+                                            </span>
                                         )}
                                     </li>
                                 )

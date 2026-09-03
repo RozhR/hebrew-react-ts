@@ -1,28 +1,29 @@
-import { useState } from 'react'
-import Card from './Card'
-import type { CardData } from '../types'
+import { useState } from "react";
+import Card from "./Card";
+import type { CardData } from "../types";
 
 type CardListProps = {
-    cards: CardData[]
-}
+    cards: CardData[];
+    onStartTest: () => void;
+};
 
-function CardList({ cards }: CardListProps) {
-    const [shuffledCards, setShuffledCards] = useState(cards)
+function CardList({ cards, onStartTest }: CardListProps) {
+    const [shuffledCards, setShuffledCards] = useState(cards);
 
     const shuffleCards = () => {
-        const newCards = [...shuffledCards]
+        const newCards = [...shuffledCards];
 
         for (let i = newCards.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1))
+            const j = Math.floor(Math.random() * (i + 1));
 
-            ;[newCards[i], newCards[j]] = [
+            [newCards[i], newCards[j]] = [
                 newCards[j],
                 newCards[i],
-            ]
+            ];
         }
 
-        setShuffledCards(newCards)
-    }
+        setShuffledCards(newCards);
+    };
 
     return (
         <>
@@ -38,6 +39,7 @@ function CardList({ cards }: CardListProps) {
                 <button
                     type="button"
                     className="styled-btn"
+                    onClick={onStartTest}
                 >
                     Тестирование
                 </button>
@@ -52,7 +54,7 @@ function CardList({ cards }: CardListProps) {
                 ))}
             </div>
         </>
-    )
+    );
 }
 
-export default CardList
+export default CardList;
