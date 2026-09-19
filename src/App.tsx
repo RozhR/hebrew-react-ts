@@ -5,12 +5,15 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import CardList from "./components/CardList";
 import { Test } from "./components/Test";
+import Statistics from "./components/Statistics";
 
 import { verbsData } from "./data/verbs";
 import { adjectivesData } from "./data/adjectives";
 import { adverbsData } from "./data/adverbs";
 
 import type { Category } from "./types";
+
+type Page = "cards" | "test" | "statistics";
 
 function App() {
     const [category, setCategory] =
@@ -19,8 +22,8 @@ function App() {
     const [level, setLevel] =
         useState(1);
 
-    const [isTesting, setIsTesting] =
-        useState(false);
+    const [page, setPage] =
+        useState<Page>("cards");
 
     const getCards = () => {
         switch (category) {
@@ -46,7 +49,7 @@ function App() {
     ) => {
         setCategory(selectedCategory);
         setLevel(selectedLevel);
-        setIsTesting(false);
+        setPage("cards");
     };
 
     const categoryTitle =
@@ -60,30 +63,40 @@ function App() {
         <>
             <Navbar
                 onSelectLevel={handleSelectLevel}
+                onShowStatistics={() =>
+                    setPage("statistics")
+                }
             />
 
-            <h2 className="level-title">
-                {categoryTitle} — Уровень {level}
-            </h2>
-
-            {isTesting ? (
-                <Test
-                    key={`${category}-${level}`}
-                    words={cards}
-                    category={category}
-                    level={level}
-                    onBackToCards={() =>
-                        setIsTesting(false)
-                    }
-                />
+            {page === "statistics" ? (
+                <Statistics />
             ) : (
-                <CardList
-                    key={`${category}-${level}`}
-                    cards={cards}
-                    onStartTest={() =>
-                        setIsTesting(true)
-                    }
-                />
+                <>
+                    <h2 className="level-title">
+                        {categoryTitle} — Уровень{" "}
+                        {level}
+                    </h2>
+
+                    {page === "test" ? (
+                        <Test
+                            key={`${category}-${level}`}
+                            words={cards}
+                            category={category}
+                            level={level}
+                            onBackToCards={() =>
+                                setPage("cards")
+                            }
+                        />
+                    ) : (
+                        <CardList
+                            key={`${category}-${level}`}
+                            cards={cards}
+                            onStartTest={() =>
+                                setPage("test")
+                            }
+                        />
+                    )}
+                </>
             )}
         </>
     );

@@ -650,3 +650,137 @@
         max-width: 320px;
     }
 }
+
+/* ===== STATISTICS ===== */
+
+.statistics-page {
+    width: min(1200px, 92%);
+    margin: 40px auto;
+    padding-bottom: 50px;
+}
+
+.statistics-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.statistics-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    align-items: start;
+}
+
+.statistics-category {
+    padding: 20px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+.statistics-category h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+}
+
+.statistics-level {
+    margin-bottom: 18px;
+    padding: 15px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.statistics-level:last-child {
+    margin-bottom: 0;
+}
+
+.statistics-level-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.statistics-level-header span {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.statistics-progress {
+    width: 100%;
+    height: 10px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.statistics-progress-fill {
+    height: 100%;
+    border-radius: inherit;
+    transition: width 0.4s ease;
+}
+
+/* ≥ 80% */
+.progress-good {
+    background: #38a169;
+}
+
+/* 50–79% */
+.progress-medium {
+    background: #d69e2e;
+}
+
+/* < 50% */
+.progress-low {
+    background: #e53e3e;
+}
+
+.statistics-level p {
+    margin: 6px 0;
+}
+
+.statistics-date,
+.statistics-attempts {
+    font-size: 0.85rem;
+    opacity: 0.75;
+}
+
+.statistics-empty,
+.statistics-no-results {
+    text-align: center;
+    opacity: 0.7;
+}
+
+.clear-statistics-btn {
+    display: block;
+    margin: 30px auto 0;
+}
+
+.nav-link-button {
+    padding: 0;
+    border: none;
+    background: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+}
+
+.nav-link-button:hover {
+    opacity: 0.8;
+}
+
+
+/* ===== STATISTICS RESPONSIVE ===== */
+
+@media (max-width: 900px) {
+    .statistics-container {
+        grid-template-columns: 1fr;
+    }
+
+    .statistics-page {
+        width: min(650px, 92%);
+    }
+}

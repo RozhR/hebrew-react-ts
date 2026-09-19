@@ -13,9 +13,11 @@ type NavbarProps = {
         category: Category,
         level: number,
     ) => void
+
+    onShowStatistics: () => void;
 }
 
-function Navbar({ onSelectLevel }: NavbarProps) {
+function Navbar({onSelectLevel, onShowStatistics, }: NavbarProps) {
     const [, setUpdate] = useState(0)
 
     useEffect(() => {
@@ -115,7 +117,13 @@ function Navbar({ onSelectLevel }: NavbarProps) {
                 </li>
 
                 <li>
-                    <a href="#">Статистика</a>
+                    <button
+                        type="button"
+                        className="nav-link-button"
+                        onClick={onShowStatistics}
+                    >
+                        Статистика
+                    </button>
                 </li>
             </ul>
         </nav>
