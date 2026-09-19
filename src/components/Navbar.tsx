@@ -1,66 +1,64 @@
-import { useEffect, useState } from 'react'
-import type { Category } from '../types'
-import { isLevelUnlocked } from '../utils/progress'
+import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+
+import type { Category } from "../types";
+import { isLevelUnlocked } from "../utils/progress";
 
 type MenuCategory = {
-    title: string
-    category: Category
-    levels: number
-}
+    title: string;
+    category: Category;
+    levels: number;
+};
 
-type NavbarProps = {
-    onSelectLevel: (
-        category: Category,
-        level: number,
-    ) => void
-
-    onShowStatistics: () => void;
-}
-
-function Navbar({onSelectLevel, onShowStatistics, }: NavbarProps) {
-    const [, setUpdate] = useState(0)
+function Navbar() {
+    const [, setUpdate] = useState(0);
 
     useEffect(() => {
         const handleLevelsUpdated = () => {
-            setUpdate((prev) => prev + 1)
-        }
+            setUpdate((prev) => prev + 1);
+        };
 
         window.addEventListener(
-            'levelsUpdated',
+            "levelsUpdated",
             handleLevelsUpdated,
-        )
+        );
 
         return () => {
             window.removeEventListener(
-                'levelsUpdated',
+                "levelsUpdated",
                 handleLevelsUpdated,
-            )
-        }
-    }, [])
+            );
+        };
+    }, []);
 
     const categories: MenuCategory[] = [
         {
-            title: 'Глаголы',
-            category: 'verbs',
+            title: "Глаголы",
+            category: "verbs",
             levels: 25,
         },
         {
-            title: 'Прилагательные',
-            category: 'adjectives',
+            title: "Прилагательные",
+            category: "adjectives",
             levels: 25,
         },
         {
-            title: 'Наречия',
-            category: 'adverbs',
+            title: "Наречия",
+            category: "adverbs",
             levels: 15,
         },
-    ]
+    ];
 
     return (
         <nav className="navbar">
             <ul className="nav-list">
                 <li>
-                    <a href="/">Главная</a>
+                    <NavLink
+                        to="/"
+                        className="nav-link"
+                    >
+                        Главная
+                    </NavLink>
                 </li>
 
                 {categories.map((category) => (
@@ -77,57 +75,62 @@ function Navbar({onSelectLevel, onShowStatistics, }: NavbarProps) {
 
                         <ul className="styled-dropdown dropdown-menu">
                             {Array.from(
-                                { length: category.levels },
-                                (_, index) => index + 1,
+                                {
+                                    length:
+                                    category.levels,
+                                },
+                                (_, index) =>
+                                    index + 1,
                             ).map((level) => {
-                                const unlocked = isLevelUnlocked(
-                                    category.category,
-                                    level,
-                                )
+                                const unlocked =
+                                    isLevelUnlocked(
+                                        category.category,
+                                        level,
+                                    );
 
                                 return (
                                     <li key={level}>
                                         {unlocked ? (
-                                            <button
-                                                type="button"
+                                            <NavLink
+                                                to={`/${category.category}/${level}`}
                                                 className="level-link"
-                                                onClick={() =>
-                                                    onSelectLevel(
-                                                        category.category,
-                                                        level,
-                                                    )
-                                                }
                                             >
-                                                Уровень {level}
-                                            </button>
+                                                Уровень{" "}
+                                                {level}
+                                            </NavLink>
                                         ) : (
                                             <span className="locked-link">
-                                                🔒 Уровень {level}
+                                                🔒 Уровень{" "}
+                                                {level}
                                             </span>
                                         )}
                                     </li>
-                                )
+                                );
                             })}
                         </ul>
                     </li>
                 ))}
 
                 <li>
-                    <a href="#">Грамматика</a>
+                    <NavLink
+                        to="/grammar"
+                        className="nav-link"
+                    >
+                        Грамматика
+                    </NavLink>
                 </li>
 
                 <li>
-                    <button
-                        type="button"
-                        className="nav-link-button"
-                        onClick={onShowStatistics}
+                    <NavLink
+                        to="/statistics"
+                        className="nav-link"
                     >
                         Статистика
-                    </button>
+                    </NavLink>
                 </li>
             </ul>
         </nav>
-    )
+    );
 }
 
-export default Navbar
+export default Navbar;

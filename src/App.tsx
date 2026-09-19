@@ -1,103 +1,61 @@
-import { useState } from "react";
+import {
+    Navigate,
+    Route,
+    Routes,
+} from "react-router-dom";
 
 import "./App.css";
 
 import Navbar from "./components/Navbar";
-import CardList from "./components/CardList";
-import { Test } from "./components/Test";
+import Home from "./components/Home";
+import Grammar from "./components/Grammar";
 import Statistics from "./components/Statistics";
+import LearningPage from "./components/LearningPage";
 
-import { verbsData } from "./data/verbs";
-import { adjectivesData } from "./data/adjectives";
-import { adverbsData } from "./data/adverbs";
-
-import type { Category } from "./types";
-
-type Page = "cards" | "test" | "statistics";
 
 function App() {
-    const [category, setCategory] =
-        useState<Category>("verbs");
-
-    const [level, setLevel] =
-        useState(1);
-
-    const [page, setPage] =
-        useState<Page>("cards");
-
-    const getCards = () => {
-        switch (category) {
-            case "verbs":
-                return verbsData[level] ?? [];
-
-            case "adjectives":
-                return adjectivesData[level] ?? [];
-
-            case "adverbs":
-                return adverbsData[level] ?? [];
-
-            default:
-                return [];
-        }
-    };
-
-    const cards = getCards();
-
-    const handleSelectLevel = (
-        selectedCategory: Category,
-        selectedLevel: number,
-    ) => {
-        setCategory(selectedCategory);
-        setLevel(selectedLevel);
-        setPage("cards");
-    };
-
-    const categoryTitle =
-        category === "verbs"
-            ? "Глаголы"
-            : category === "adjectives"
-                ? "Прилагательные"
-                : "Наречия";
-
     return (
         <>
-            <Navbar
-                onSelectLevel={handleSelectLevel}
-                onShowStatistics={() =>
-                    setPage("statistics")
-                }
-            />
+            <Navbar />
 
-            {page === "statistics" ? (
-                <Statistics />
-            ) : (
-                <>
-                    <h2 className="level-title">
-                        {categoryTitle} — Уровень{" "}
-                        {level}
-                    </h2>
+            <Routes>
+                <Route
+                    path="/"
+                    element={<Home />}
+                />
 
-                    {page === "test" ? (
-                        <Test
-                            key={`${category}-${level}`}
-                            words={cards}
-                            category={category}
-                            level={level}
-                            onBackToCards={() =>
-                                setPage("cards")
-                            }
+                <Route
+                    path="/statistics"
+                    element={<Statistics />}
+                />
+
+                <Route
+                    path="/grammar"
+                    element={<Grammar />}
+                />
+
+                <Route
+                    path="/:category/:level"
+                    element={<LearningPage />}
+                />
+
+                <Route
+                    path="/:category/:level/test"
+                    element={
+                        <LearningPage testMode />
+                    }
+                />
+
+                <Route
+                    path="*"
+                    element={
+                        <Navigate
+                            to="/"
+                            replace
                         />
-                    ) : (
-                        <CardList
-                            key={`${category}-${level}`}
-                            cards={cards}
-                            onStartTest={() =>
-                                setPage("test")
-                            }
-                        />
-                    )}
-                </>
-            )}
+                    }
+                />
+            </Routes>
         </>
     );
 }
