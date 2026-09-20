@@ -11,6 +11,7 @@ interface TestProps {
     words: CardData[];
     category: Category;
     level: number;
+    isLastLevel: boolean;
     onBackToCards: () => void;
 }
 
@@ -68,9 +69,15 @@ function saveStatistics(
     const savedStats =
         localStorage.getItem("testStats");
 
-    const stats: TestStats = savedStats
-        ? JSON.parse(savedStats)
-        : {};
+    const stats: TestStats = (() => {
+        try {
+            return savedStats
+                ? JSON.parse(savedStats)
+                : {};
+        } catch {
+            return {};
+        }
+    })();
 
     stats[category] ??= {};
     stats[category]![level] ??= [];
@@ -91,6 +98,7 @@ export function Test({
                          words,
                          category,
                          level,
+                         isLastLevel,
                          onBackToCards,
                      }: TestProps) {
     const [testWords, setTestWords] =
@@ -291,9 +299,9 @@ export function Test({
 
                     {passed ? (
                         <p className="test-result-message passed-message">
-                            Отличный результат!
-                            Следующий уровень
-                            разблокирован.
+                            {isLastLevel
+                                ? "Отличный результат! Вы завершили все уровни этой категории."
+                                : "Отличный результат! Следующий уровень разблокирован."}
                         </p>
                     ) : (
                         <p className="test-result-message failed-message">

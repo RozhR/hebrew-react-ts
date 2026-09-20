@@ -134,6 +134,7 @@ function LearningPage({
                     words={cards}
                     category={categoryParam}
                     level={level}
+                    isLastLevel={level === maxLevel}
                     onBackToCards={() =>
                         navigate(
                             `/${categoryParam}/${level}`,

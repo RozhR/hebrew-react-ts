@@ -13,6 +13,9 @@ type MenuCategory = {
 function Navbar() {
     const [, setUpdate] = useState(0);
 
+    const [openCategory, setOpenCategory] =
+        useState<Category | null>(null);
+
     useEffect(() => {
         const handleLevelsUpdated = () => {
             setUpdate((prev) => prev + 1);
@@ -49,6 +52,10 @@ function Navbar() {
         },
     ];
 
+    const closeMenu = () => {
+        setOpenCategory(null);
+    };
+
     return (
         <nav className="navbar">
             <ul className="nav-list">
@@ -56,6 +63,7 @@ function Navbar() {
                     <NavLink
                         to="/"
                         className="nav-link"
+                        onClick={closeMenu}
                     >
                         Главная
                     </NavLink>
@@ -69,11 +77,26 @@ function Navbar() {
                         <button
                             type="button"
                             className="dropdown-toggle"
+                            onClick={() =>
+                                setOpenCategory(
+                                    openCategory ===
+                                    category.category
+                                        ? null
+                                        : category.category,
+                                )
+                            }
                         >
                             {category.title} ▾
                         </button>
 
-                        <ul className="styled-dropdown dropdown-menu">
+                        <ul
+                            className={
+                                openCategory ===
+                                category.category
+                                    ? "styled-dropdown dropdown-menu open"
+                                    : "styled-dropdown dropdown-menu"
+                            }
+                        >
                             {Array.from(
                                 {
                                     length:
@@ -94,6 +117,9 @@ function Navbar() {
                                             <NavLink
                                                 to={`/${category.category}/${level}`}
                                                 className="level-link"
+                                                onClick={
+                                                    closeMenu
+                                                }
                                             >
                                                 Уровень{" "}
                                                 {level}
@@ -115,6 +141,7 @@ function Navbar() {
                     <NavLink
                         to="/grammar"
                         className="nav-link"
+                        onClick={closeMenu}
                     >
                         Грамматика
                     </NavLink>
@@ -124,6 +151,7 @@ function Navbar() {
                     <NavLink
                         to="/statistics"
                         className="nav-link"
+                        onClick={closeMenu}
                     >
                         Статистика
                     </NavLink>
