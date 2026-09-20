@@ -35,16 +35,28 @@ function generateAnswers(
     words: CardData[],
     currentWord: CardData,
 ): string[] {
-    const wrongAnswers = words
-        .filter(
-            (word) =>
-                word.hebrew !== currentWord.hebrew,
-        )
-        .map((word) => word.russian);
+    const wrongAnswers = Array.from(
+        new Set(
+            words
+                .filter(
+                    (word) =>
+                        word.hebrew !==
+                        currentWord.hebrew &&
+                        word.russian !==
+                        currentWord.russian,
+                )
+                .map(
+                    (word) =>
+                        word.russian,
+                ),
+        ),
+    );
 
     return shuffleArray([
         currentWord.russian,
-        ...shuffleArray(wrongAnswers).slice(0, 3),
+        ...shuffleArray(
+            wrongAnswers,
+        ).slice(0, 3),
     ]);
 }
 

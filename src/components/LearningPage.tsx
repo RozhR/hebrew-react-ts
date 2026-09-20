@@ -11,6 +11,8 @@ import { verbsData } from "../data/verbs";
 import { adjectivesData } from "../data/adjectives";
 import { adverbsData } from "../data/adverbs";
 
+import { isLevelUnlocked } from "../utils/progress";
+
 import type { Category } from "../types";
 
 
@@ -89,6 +91,19 @@ function LearningPage({
         !Number.isInteger(level) ||
         level < 1 ||
         level > maxLevel
+    ) {
+        return (
+            <Navigate
+                to={`/${categoryParam}/1`}
+                replace
+            />
+        );
+    }
+    if (
+        !isLevelUnlocked(
+            categoryParam,
+            level,
+        )
     ) {
         return (
             <Navigate
