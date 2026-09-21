@@ -1,4 +1,9 @@
 import {
+    lazy,
+    Suspense,
+} from "react";
+
+import {
     Navigate,
     Route,
     Routes,
@@ -8,9 +13,14 @@ import "./App.css";
 
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
-import Grammar from "./components/Grammar";
 import Statistics from "./components/Statistics";
 import LearningPage from "./components/LearningPage";
+
+
+const Grammar = lazy(
+    () => import("./components/Grammar"),
+);
+
 
 function App() {
     return (
@@ -30,7 +40,17 @@ function App() {
 
                 <Route
                     path="/grammar"
-                    element={<Grammar />}
+                    element={
+                        <Suspense
+                            fallback={
+                                <div className="grammar-loading">
+                                    Загрузка грамматики...
+                                </div>
+                            }
+                        >
+                            <Grammar />
+                        </Suspense>
+                    }
                 />
 
                 <Route
@@ -58,5 +78,6 @@ function App() {
         </>
     );
 }
+
 
 export default App;

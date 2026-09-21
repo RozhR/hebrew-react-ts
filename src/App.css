@@ -1335,18 +1335,6 @@
 }
 
 /* =========================================================
-   GRAMMAR RESPONSIVE
-   ========================================================= */
-
-/*
- * На компьютере поле Grammar остаётся
- * закреплённым в правом нижнем углу.
- *
- * Оно не влияет на ширину card-container.
- */
-
-
-/* =========================================================
    TOUCH DEVICES
    ========================================================= */
 
@@ -1490,5 +1478,645 @@
         width: 100%;
 
         max-width: 320px;
+    }
+}
+
+/* =========================================================
+   GRAMMAR PAGE
+   ========================================================= */
+
+.grammar-page {
+    width: min(1200px, 92%);
+
+    margin: 40px auto 70px;
+}
+
+
+.grammar-page-title {
+    margin-bottom: 25px;
+
+    text-align: center;
+
+    font-size: 2rem;
+
+    color: #9f7aea;
+
+    text-shadow:
+            0 2px 4px
+            rgba(0, 0, 0, 0.4);
+}
+
+
+.grammar-page-toolbar {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 30px;
+
+    padding: 16px 20px;
+
+    border-radius: 12px;
+
+    background:
+            rgba(255, 255, 255, 0.05);
+}
+
+
+.grammar-page-toolbar p {
+    margin: 0;
+
+    font-size: 18px;
+}
+
+
+.grammar-page-toolbar strong {
+    color: #9f7aea;
+}
+
+
+.grammar-clear-btn,
+.grammar-details-btn,
+.grammar-remove-btn {
+    padding: 8px 15px;
+
+    border: none;
+    border-radius: 8px;
+
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition:
+            transform 0.2s ease,
+            opacity 0.2s ease,
+            background 0.2s ease;
+}
+
+
+.grammar-clear-btn,
+.grammar-remove-btn {
+    background: #c53030;
+}
+
+
+.grammar-details-btn {
+    background: #805ad5;
+}
+
+
+.grammar-clear-btn:hover,
+.grammar-details-btn:hover,
+.grammar-remove-btn:hover {
+    transform: translateY(-2px);
+
+    opacity: 0.9;
+}
+
+
+.grammar-empty {
+    max-width: 600px;
+
+    margin: 60px auto;
+
+    padding: 35px;
+
+    border-radius: 14px;
+
+    background:
+            rgba(255, 255, 255, 0.05);
+
+    text-align: center;
+}
+
+
+.grammar-empty h3 {
+    margin-bottom: 12px;
+
+    color: #9f7aea;
+}
+
+
+.grammar-empty p {
+    color: #cbd5e1;
+
+    line-height: 1.5;
+}
+
+
+.grammar-category-section {
+    margin-bottom: 40px;
+}
+
+
+.grammar-category-title {
+    margin-bottom: 18px;
+
+    font-size: 2rem;
+
+    color: #9f7aea;
+
+    text-shadow:
+            0 2px 4px
+            rgba(0, 0, 0, 0.4);
+}
+
+
+.grammar-words-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+
+.grammar-word-card {
+    text-align: left;
+}
+
+
+.grammar-word-header {
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.grammar-word-header > div:first-child {
+    text-align: left;
+}
+
+
+.grammar-word-hebrew {
+    margin: 0;
+
+    text-align: left;
+
+    font-size: 2rem;
+
+    color: #d6bcfa;
+}
+
+
+.grammar-word-translation {
+    margin: 5px 0 0;
+
+    text-align: left;
+
+    color: #cbd5e1;
+
+    font-size: 17px;
+}
+
+
+.grammar-word-actions {
+    display: flex;
+
+    justify-content: flex-start;
+
+    gap: 10px;
+
+    margin-top: 16px;
+}
+
+.grammar-word-details {
+    margin-top: 20px;
+
+    padding-top: 20px;
+
+    text-align: left;
+
+    border-top:
+            1px solid
+            rgba(255, 255, 255, 0.1);
+}
+
+.grammar-word-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.grammar-word-hebrew {
+    margin: 0;
+
+    font-size: 2rem;
+
+    color: #d6bcfa;
+}
+
+
+.grammar-word-translation {
+    margin: 5px 0 0;
+
+    color: #cbd5e1;
+
+    font-size: 17px;
+}
+
+
+.grammar-word-meta {
+    flex-shrink: 0;
+
+    padding: 6px 10px;
+
+    border-radius: 8px;
+
+    background:
+            rgba(159, 122, 234, 0.15);
+
+    color: #d6bcfa;
+
+    font-size: 14px;
+}
+
+
+.grammar-word-actions {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 16px;
+}
+
+
+.grammar-word-details {
+    margin-top: 20px;
+
+    padding-top: 20px;
+
+    border-top:
+            1px solid
+            rgba(255, 255, 255, 0.1);
+}
+
+
+.grammar-detail-section {
+    margin-bottom: 25px;
+}
+
+
+.grammar-detail-section:last-child {
+    margin-bottom: 0;
+}
+
+
+.grammar-detail-section h4 {
+    margin-bottom: 14px;
+
+    color: #d6bcfa;
+
+    font-size: 1.25rem;
+
+    font-weight: 700;
+}
+
+
+.grammar-info-grid,
+.grammar-forms-grid {
+    display: grid;
+
+    grid-template-columns:
+            repeat(
+                    auto-fit,
+                    minmax(140px, 1fr)
+            );
+
+    gap: 10px;
+}
+
+
+.grammar-info-item,
+.grammar-form-item,
+.grammar-example {
+    padding: 16px 18px;
+
+    border-radius: 10px;
+
+    background:
+            rgba(255, 255, 255, 0.06);
+
+    border-left:
+            3px solid
+            rgba(159, 122, 234, 0.75);
+}
+
+
+.grammar-info-item span,
+.grammar-form-label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #b9c3d3;
+
+    font-size: 14px;
+}
+
+
+.grammar-info-item strong,
+.grammar-form-item strong {
+    color: #f7fafc;
+
+    font-size: 20px;
+
+    font-weight: 600;
+}
+
+
+.grammar-form-item strong {
+    display: block;
+
+    font-size: 19px;
+}
+
+
+.grammar-usage-text {
+    margin-top: 12px;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    background:
+            rgba(255, 255, 255, 0.04);
+
+    color: #e2e8f0;
+
+    line-height: 1.5;
+}
+
+
+.grammar-examples {
+    display: grid;
+
+    gap: 10px;
+}
+
+
+.grammar-example {
+    padding: 16px 18px;
+
+    border-radius: 10px;
+
+    background:
+            rgba(255, 255, 255, 0.06);
+
+    border-left:
+            3px solid
+            rgba(159, 122, 234, 0.65);
+}
+
+
+.grammar-example-hebrew {
+    margin: 0 0 8px;
+
+    color: #f7fafc;
+
+    font-size: 23px;
+
+    font-weight: 500;
+
+    line-height: 1.5;
+}
+
+
+.grammar-example-translation {
+    margin: 0;
+
+    color: #b8c4d6;
+
+    font-size: 17px;
+
+    line-height: 1.45;
+}
+
+
+.grammar-loading {
+    margin: 70px auto;
+
+    text-align: center;
+
+    color: #9f7aea;
+
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   GRAMMAR PAGE MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+    .grammar-page {
+        width: calc(100% - 30px);
+
+        margin-top: 25px;
+    }
+
+
+    .grammar-page-toolbar {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        text-align: center;
+    }
+
+
+    .grammar-word-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 10px;
+    }
+
+
+    .grammar-word-actions {
+        flex-direction: column;
+    }
+
+
+    .grammar-details-btn,
+    .grammar-remove-btn {
+        width: 100%;
+    }
+
+
+    .grammar-info-grid,
+    .grammar-forms-grid {
+        grid-template-columns:
+                repeat(
+                        2,
+                        minmax(0, 1fr)
+                );
+    }
+}
+
+/* =========================================================
+   VERB TENSE TABLE
+   ========================================================= */
+
+.grammar-tense-table-wrapper {
+    width: 100%;
+
+    overflow-x: visible;
+
+    border-radius: 10px;
+}
+
+
+.grammar-tense-table {
+    width: 100%;
+
+    min-width: 0;
+
+    table-layout: fixed;
+
+    border-collapse: separate;
+
+    /*
+     * 8px — между колонками
+     * 10px — между строками
+     */
+    border-spacing: 8px 10px;
+}
+
+
+/* ===== ВСЕ ЯЧЕЙКИ ===== */
+
+.grammar-tense-table th,
+.grammar-tense-table td {
+    padding: 12px 10px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background:
+            rgba(255, 255, 255, 0.06);
+
+    text-align: center;
+
+    white-space: nowrap;
+
+    transition:
+            background 0.2s ease,
+            transform 0.2s ease;
+}
+
+.grammar-tense-table thead th:first-child,
+.grammar-tense-table tbody th {
+    border-left:
+            3px solid
+            rgba(159, 122, 234, 0.75);
+}
+
+
+/* ===== ЗАГОЛОВКИ МЕСТОИМЕНИЙ ===== */
+
+.grammar-tense-table thead th {
+    background:
+            rgba(159, 122, 234, 0.16);
+
+    color: #d6bcfa;
+
+    font-size: 19px;
+
+    font-weight: 700;
+}
+
+
+/* ===== КОЛОНКА "ВРЕМЯ" ===== */
+
+.grammar-tense-table thead th:first-child,
+.grammar-tense-table tbody th {
+    width: 14%;
+
+    text-align: left;
+
+    background:
+            rgba(159, 122, 234, 0.12);
+
+    color: #d6bcfa;
+
+    font-weight: 700;
+}
+
+
+.grammar-tense-table tbody th {
+    font-size: 18px;
+}
+
+
+/* ===== ФОРМЫ ГЛАГОЛА ===== */
+
+.grammar-tense-table td {
+    color: #f7fafc;
+
+    font-size: 19px;
+
+    font-weight: 600;
+}
+
+
+/* ===== HOVER ===== */
+
+.grammar-tense-table tbody td:hover {
+    background:
+            rgba(159, 122, 234, 0.12);
+
+    transform:
+            translateY(-2px);
+}
+
+
+.grammar-tense-table tbody th:hover {
+    background:
+            rgba(159, 122, 234, 0.18);
+}
+
+/* =========================================================
+   VERB TENSE TABLE MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+    .grammar-tense-table {
+        min-width: 980px;
+    }
+
+    .grammar-tense-table th,
+    .grammar-tense-table td {
+        padding: 12px 12px;
+    }
+
+    .grammar-tense-table thead th {
+        font-size: 15px;
+    }
+
+    .grammar-tense-table tbody th {
+        min-width: 150px;
+
+        font-size: 14px;
+    }
+
+    .grammar-tense-table td {
+        min-width: 105px;
+
+        font-size: 17px;
     }
 }
