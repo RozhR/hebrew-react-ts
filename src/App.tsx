@@ -12,7 +12,6 @@ import Grammar from "./components/Grammar";
 import Statistics from "./components/Statistics";
 import LearningPage from "./components/LearningPage";
 
-
 function App() {
     return (
         <>
