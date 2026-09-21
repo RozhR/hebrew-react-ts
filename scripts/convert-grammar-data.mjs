@@ -64,16 +64,22 @@ function normalizeRows(rows, fileName) {
       throw new Error(`${fileName}: missing "id" column`);
     }
 
+    const cleanedRow = Object.fromEntries(
+        Object.entries(row).filter(
+            ([key]) => !key.startsWith("__EMPTY"),
+        ),
+    );
+
     const normalized = {
-      ...row,
-      id: asInteger(row.id, "id", fileName),
+      ...cleanedRow,
+      id: asInteger(cleanedRow.id, "id", fileName),
     };
 
     if ("level" in normalized) {
       normalized.level = asInteger(
-        normalized.level,
-        "level",
-        fileName,
+          normalized.level,
+          "level",
+          fileName,
       );
     }
 
