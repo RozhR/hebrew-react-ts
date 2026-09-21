@@ -73,6 +73,7 @@ function LearningPage({
         level: levelParam,
     } = useParams();
 
+
     if (!isCategory(categoryParam)) {
         return (
             <Navigate
@@ -82,10 +83,12 @@ function LearningPage({
         );
     }
 
+
     const level = Number(levelParam);
 
     const maxLevel =
         categoryLevels[categoryParam];
+
 
     if (
         !Number.isInteger(level) ||
@@ -99,6 +102,8 @@ function LearningPage({
             />
         );
     }
+
+
     if (
         !isLevelUnlocked(
             categoryParam,
@@ -113,13 +118,28 @@ function LearningPage({
         );
     }
 
+
     const cards = getCards(
         categoryParam,
         level,
     );
 
+
+    const cardsWithIds = cards.map(
+        (card, index) => ({
+            ...card,
+
+            id:
+                (level - 1) * 20 +
+                index +
+                1,
+        }),
+    );
+
+
     const categoryTitle =
         categoryTitles[categoryParam];
+
 
     return (
         <>
@@ -134,7 +154,9 @@ function LearningPage({
                     words={cards}
                     category={categoryParam}
                     level={level}
-                    isLastLevel={level === maxLevel}
+                    isLastLevel={
+                        level === maxLevel
+                    }
                     onBackToCards={() =>
                         navigate(
                             `/${categoryParam}/${level}`,
@@ -144,7 +166,8 @@ function LearningPage({
             ) : (
                 <CardList
                     key={`${categoryParam}-${level}`}
-                    cards={cards}
+                    cards={cardsWithIds}
+                    category={categoryParam}
                     onStartTest={() =>
                         navigate(
                             `/${categoryParam}/${level}/test`,
@@ -155,5 +178,6 @@ function LearningPage({
         </>
     );
 }
+
 
 export default LearningPage;

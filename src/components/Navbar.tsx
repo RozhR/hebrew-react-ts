@@ -1,8 +1,15 @@
-import { useEffect, useState } from "react";
+import {
+    useEffect,
+    useState,
+} from "react";
+
 import { NavLink } from "react-router-dom";
 
 import type { Category } from "../types";
+
 import { isLevelUnlocked } from "../utils/progress";
+import { useGrammar } from "../context/GrammarContext";
+
 
 type MenuCategory = {
     title: string;
@@ -10,11 +17,15 @@ type MenuCategory = {
     levels: number;
 };
 
+
 function Navbar() {
     const [, setUpdate] = useState(0);
 
     const [openCategory, setOpenCategory] =
         useState<Category | null>(null);
+
+    const { count } = useGrammar();
+
 
     useEffect(() => {
         const handleLevelsUpdated = () => {
@@ -34,6 +45,7 @@ function Navbar() {
         };
     }, []);
 
+
     const categories: MenuCategory[] = [
         {
             title: "Глаголы",
@@ -52,9 +64,11 @@ function Navbar() {
         },
     ];
 
+
     const closeMenu = () => {
         setOpenCategory(null);
     };
+
 
     return (
         <nav className="navbar">
@@ -69,81 +83,105 @@ function Navbar() {
                     </NavLink>
                 </li>
 
-                {categories.map((category) => (
-                    <li
-                        className="dropdown"
-                        key={category.category}
-                    >
-                        <button
-                            type="button"
-                            className="dropdown-toggle"
-                            onClick={() =>
-                                setOpenCategory(
+                {categories.map(
+                    (category) => (
+                        <li
+                            className="dropdown"
+                            key={
+                                category.category
+                            }
+                        >
+                            <button
+                                type="button"
+                                className="dropdown-toggle"
+                                onClick={() =>
+                                    setOpenCategory(
+                                        openCategory ===
+                                        category.category
+                                            ? null
+                                            : category.category,
+                                    )
+                                }
+                            >
+                                {category.title} ▾
+                            </button>
+
+                            <ul
+                                className={
                                     openCategory ===
                                     category.category
-                                        ? null
-                                        : category.category,
-                                )
-                            }
-                        >
-                            {category.title} ▾
-                        </button>
+                                        ? "styled-dropdown dropdown-menu open"
+                                        : "styled-dropdown dropdown-menu"
+                                }
+                            >
+                                {Array.from(
+                                    {
+                                        length:
+                                        category.levels,
+                                    },
+                                    (
+                                        _,
+                                        index,
+                                    ) =>
+                                        index + 1,
+                                ).map(
+                                    (level) => {
+                                        const unlocked =
+                                            isLevelUnlocked(
+                                                category.category,
+                                                level,
+                                            );
 
-                        <ul
-                            className={
-                                openCategory ===
-                                category.category
-                                    ? "styled-dropdown dropdown-menu open"
-                                    : "styled-dropdown dropdown-menu"
-                            }
-                        >
-                            {Array.from(
-                                {
-                                    length:
-                                    category.levels,
-                                },
-                                (_, index) =>
-                                    index + 1,
-                            ).map((level) => {
-                                const unlocked =
-                                    isLevelUnlocked(
-                                        category.category,
-                                        level,
-                                    );
-
-                                return (
-                                    <li key={level}>
-                                        {unlocked ? (
-                                            <NavLink
-                                                to={`/${category.category}/${level}`}
-                                                className="level-link"
-                                                onClick={
-                                                    closeMenu
+                                        return (
+                                            <li
+                                                key={
+                                                    level
                                                 }
                                             >
-                                                Уровень{" "}
-                                                {level}
-                                            </NavLink>
-                                        ) : (
-                                            <span className="locked-link">
-                                                🔒 Уровень{" "}
-                                                {level}
-                                            </span>
-                                        )}
-                                    </li>
-                                );
-                            })}
-                        </ul>
-                    </li>
-                ))}
+                                                {unlocked ? (
+                                                    <NavLink
+                                                        to={`/${category.category}/${level}`}
+                                                        className="level-link"
+                                                        onClick={
+                                                            closeMenu
+                                                        }
+                                                    >
+                                                        Уровень{" "}
+                                                        {
+                                                            level
+                                                        }
+                                                    </NavLink>
+                                                ) : (
+                                                    <span className="locked-link">
+                                                        🔒
+                                                        Уровень{" "}
+                                                        {
+                                                            level
+                                                        }
+                                                    </span>
+                                                )}
+                                            </li>
+                                        );
+                                    },
+                                )}
+                            </ul>
+                        </li>
+                    ),
+                )}
 
                 <li>
                     <NavLink
                         to="/grammar"
-                        className="nav-link"
+                        className="nav-link grammar-nav-link"
                         onClick={closeMenu}
                     >
-                        Грамматика
+                        <span>
+                            Грамматика
+                        </span>
+
+                        <span className="grammar-counter">
+                            {count}
+                        </span>
                     </NavLink>
                 </li>
 
@@ -160,5 +198,6 @@ function Navbar() {
         </nav>
     );
 }
+
 
 export default Navbar;

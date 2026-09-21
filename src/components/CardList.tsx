@@ -1,30 +1,49 @@
 import { useState } from "react";
 
 import Card from "./Card";
+import GrammarDropZone from "./GrammarDropZone";
 
-import type { CardData } from "../types";
+import type {
+    CardWithId,
+    Category,
+} from "../types";
+
 
 type CardListProps = {
-    cards: CardData[];
+    cards: CardWithId[];
+    category: Category;
     onStartTest: () => void;
 };
 
+
 function CardList({
                       cards,
+                      category,
                       onStartTest,
                   }: CardListProps) {
     const [shuffledCards, setShuffledCards] =
-        useState<CardData[]>(cards);
+        useState<CardWithId[]>(cards);
+
 
     const shuffleCards = () => {
-        const newCards = [...shuffledCards];
+        const newCards = [
+            ...shuffledCards,
+        ];
 
-        for (let i = newCards.length - 1; i > 0; i--) {
+        for (
+            let i =
+                newCards.length - 1;
+            i > 0;
+            i--
+        ) {
             const j = Math.floor(
                 Math.random() * (i + 1),
             );
 
-            [newCards[i], newCards[j]] = [
+            [
+                newCards[i],
+                newCards[j],
+            ] = [
                 newCards[j],
                 newCards[i],
             ];
@@ -33,13 +52,18 @@ function CardList({
         setShuffledCards(newCards);
     };
 
+
     return (
         <>
+            <GrammarDropZone />
+
             <div className="functions">
                 <button
                     type="button"
                     className="styled-btn"
-                    onClick={shuffleCards}
+                    onClick={
+                        shuffleCards
+                    }
                 >
                     Перемешать
                 </button>
@@ -47,7 +71,9 @@ function CardList({
                 <button
                     type="button"
                     className="styled-btn"
-                    onClick={onStartTest}
+                    onClick={
+                        onStartTest
+                    }
                 >
                     Тестирование
                 </button>
@@ -55,10 +81,13 @@ function CardList({
 
             <div className="card-container">
                 {shuffledCards.map(
-                    (card, index) => (
+                    (card) => (
                         <Card
-                            key={`${card.hebrew}-${index}`}
+                            key={`${category}-${card.id}`}
                             card={card}
+                            category={
+                                category
+                            }
                         />
                     ),
                 )}
@@ -66,5 +95,6 @@ function CardList({
         </>
     );
 }
+
 
 export default CardList;

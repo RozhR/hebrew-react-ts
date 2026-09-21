@@ -4,46 +4,106 @@
 
 .navbar {
     width: 100%;
+
     background: #1f2733;
+
     padding: 12px 0;
+
     margin-bottom: 25px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+
+    box-shadow:
+            0 4px 10px
+            rgba(0, 0, 0, 0.4);
+
     position: relative;
+
     z-index: 100;
 }
 
+
 .nav-list {
     list-style: none;
+
     display: flex;
+
     justify-content: center;
     align-items: center;
+
     gap: 30px;
+
     position: relative;
 }
+
 
 .nav-list li {
     position: relative;
 }
 
+
 .nav-list a,
 .dropdown-toggle {
     color: #e2e8f0;
+
     text-decoration: none;
+
     font-size: 18px;
+
     padding: 8px 12px;
+
     cursor: pointer;
-    transition: color 0.3s;
+
+    transition:
+            color 0.3s;
 }
+
 
 .dropdown-toggle {
     background: none;
+
     border: none;
+
     font-family: inherit;
 }
+
 
 .nav-list a:hover,
 .dropdown-toggle:hover {
     color: #9f7aea;
+}
+
+
+/* =========================================================
+   GRAMMAR NAVBAR COUNTER
+   ========================================================= */
+
+.grammar-nav-link {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+.grammar-counter {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 22px;
+    height: 22px;
+
+    padding: 0 6px;
+
+    border-radius: 12px;
+
+    background: #9f7aea;
+
+    color: white;
+
+    font-size: 12px;
+    font-weight: 700;
 }
 
 
@@ -53,20 +113,27 @@
 
 .dropdown-menu {
     position: absolute;
+
     top: 35px;
     left: 0;
+
     min-width: 180px;
+
     padding: 0;
+
     border-radius: 0;
+
     z-index: 200;
 }
 
+
 .styled-dropdown {
-    background: linear-gradient(
-            135deg,
-            #4a5568,
-            #2d3748
-    );
+    background:
+            linear-gradient(
+                    135deg,
+                    #4a5568,
+                    #2d3748
+            );
 
     border-radius: 12px;
 
@@ -77,6 +144,7 @@
             rgba(0, 0, 0, 0.45);
 
     transform-origin: top;
+
     transform: scaleY(0);
 
     opacity: 0;
@@ -90,10 +158,14 @@
             opacity 0.25s ease;
 }
 
-.dropdown:hover .styled-dropdown,
+
+.dropdown:hover
+.styled-dropdown,
 .styled-dropdown.open {
     transform: scaleY(1);
+
     opacity: 1;
+
     pointer-events: auto;
 }
 
@@ -102,6 +174,7 @@
 
 .level-link {
     display: block;
+
     width: 100%;
 
     padding: 10px 15px;
@@ -113,6 +186,7 @@
     color: #f7fafc;
 
     font-size: 17px;
+
     text-align: left;
 
     cursor: pointer;
@@ -124,15 +198,19 @@
             color 0.25s;
 }
 
+
 .level-link:hover {
-    background: rgba(255, 255, 255, 0.08);
+    background:
+            rgba(255, 255, 255, 0.08);
+
     color: #d6bcfa;
 }
 
 
 /* ===== ЗАБЛОКИРОВАННЫЙ УРОВЕНЬ ===== */
 
-.styled-dropdown .locked-link {
+.styled-dropdown
+.locked-link {
     display: block;
 
     padding: 10px 15px;
@@ -146,8 +224,10 @@
     cursor: not-allowed;
 }
 
+
 .locked-link:hover {
     color: #e2e8f0;
+
     background: transparent;
 }
 
@@ -166,7 +246,10 @@
     margin-top: 30px;
 }
 
+
 .card {
+    position: relative;
+
     width: 220px;
     height: 160px;
 
@@ -174,16 +257,34 @@
 
     cursor: grab;
 
-    transition: all 0.4s ease;
+    transition:
+            all 0.4s ease;
+
+    user-select: none;
+
+    -webkit-user-select: none;
+
+    -webkit-touch-callout: none;
+
+    /*
+     * Разрешаем вертикальный scroll страницы,
+     * но сохраняем возможность long press.
+     */
+    touch-action: pan-y;
 }
+
 
 .card:active {
     cursor: grabbing;
 }
 
+
 .card:hover {
-    transform: translateY(-5px) scale(1.03);
+    transform:
+            translateY(-5px)
+            scale(1.03);
 }
+
 
 .card-inner {
     width: 100%;
@@ -193,12 +294,17 @@
 
     transform-style: preserve-3d;
 
-    transition: transform 0.6s;
+    transition:
+            transform 0.6s;
 }
 
-.card.flipped .card-inner {
-    transform: rotateY(180deg);
+
+.card.flipped
+.card-inner {
+    transform:
+            rotateY(180deg);
 }
+
 
 .card-front,
 .card-back {
@@ -212,6 +318,7 @@
     border-radius: 12px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -226,26 +333,157 @@
             rgba(0, 0, 0, 0.4);
 }
 
+
 .card-front {
-    background: linear-gradient(
-            135deg,
-            #4a5568,
-            #2d3748
-    );
+    background:
+            linear-gradient(
+                    135deg,
+                    #4a5568,
+                    #2d3748
+            );
 
     color: #f7fafc;
 }
 
+
 .card-back {
-    background: linear-gradient(
-            135deg,
-            #9f7aea,
-            #805ad5
-    );
+    background:
+            linear-gradient(
+                    135deg,
+                    #9f7aea,
+                    #805ad5
+            );
 
     color: white;
 
-    transform: rotateY(180deg);
+    transform:
+            rotateY(180deg);
+}
+
+
+/* =========================================================
+   GRAMMAR CARD INDICATOR
+   ========================================================= */
+
+.grammar-card-indicator {
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+
+    z-index: 30;
+
+    width: 29px;
+    height: 29px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #9f7aea;
+
+    color: #ffffff;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    box-shadow:
+            0 3px 10px
+            rgba(0, 0, 0, 0.35);
+
+    cursor: pointer;
+
+    transition:
+            background 0.2s ease,
+            transform 0.2s ease;
+}
+
+
+.grammar-indicator-remove {
+    display: none;
+}
+
+
+.grammar-card-indicator:hover {
+    background: #e53e3e;
+
+    transform:
+            scale(1.08);
+}
+
+
+.grammar-card-indicator:hover
+.grammar-indicator-check {
+    display: none;
+}
+
+
+.grammar-card-indicator:hover
+.grammar-indicator-remove {
+    display: inline;
+}
+
+
+/* ===== КАРТОЧКА УЖЕ В GRAMMAR ===== */
+
+.card.in-grammar
+.card-front {
+    box-shadow:
+            0 8px 20px
+            rgba(0, 0, 0, 0.4),
+            0 0 0 1px
+            rgba(159, 122, 234, 0.35);
+}
+
+
+/* =========================================================
+   MOBILE LONG PRESS
+   ========================================================= */
+
+.card.long-press-active {
+    transform:
+            translateY(-3px)
+            scale(1.02);
+}
+
+
+.card.long-press-active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: -6px;
+
+    z-index: 25;
+
+    height: 4px;
+
+    border-radius: 4px;
+
+    background: #9f7aea;
+
+    animation:
+            grammar-long-press
+            700ms linear forwards;
+}
+
+
+@keyframes grammar-long-press {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
 }
 
 
@@ -255,6 +493,7 @@
 
 .functions {
     display: flex;
+
     justify-content: center;
 
     gap: 20px;
@@ -281,8 +520,10 @@
             rgba(0, 0, 0, 0.5);
 }
 
+
 .locked-level {
-    margin: 40px auto 0;
+    margin:
+            40px auto 0;
 
     padding: 30px;
 
@@ -299,12 +540,158 @@
             rgba(0, 0, 0, 0.4);
 }
 
+
 .locked-level p {
     margin-top: 15px;
 
     font-size: 18px;
 
     color: #cbd5e1;
+}
+
+    /* =========================================================
+   GRAMMAR DROP ZONE
+   ========================================================= */
+
+    .grammar-drop-zone {
+        position: fixed;
+
+        top: 68px;
+        right: 25px;
+
+        z-index: 80;
+
+        width: 280px;
+
+        padding: 12px 16px;
+
+        border-radius: 14px;
+
+        background:
+                rgba(255, 255, 255, 0.05);
+
+        box-shadow:
+                0 4px 15px
+                rgba(0, 0, 0, 0.25);
+
+        transition:
+                transform 0.25s ease,
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+    }
+
+
+    .grammar-drop-title {
+        margin: 0 0 8px;
+
+        text-align: center;
+
+        font-size: 1.4rem;
+
+        color: #9f7aea;
+    }
+
+
+    .grammar-drop-inner {
+        padding: 9px 12px;
+
+        border-radius: 10px;
+
+        background:
+                rgba(255, 255, 255, 0.06);
+    }
+
+
+    .grammar-drop-header {
+        display: flex;
+
+        align-items: center;
+        justify-content: space-between;
+
+        margin-bottom: 6px;
+    }
+
+
+    .grammar-drop-header strong {
+        color: #f7fafc;
+    }
+
+
+    .grammar-drop-count {
+        min-width: 28px;
+        height: 28px;
+
+        display: inline-flex;
+
+        align-items: center;
+        justify-content: center;
+
+        padding: 0 8px;
+
+        border-radius: 14px;
+
+        background: #9f7aea;
+
+        color: white;
+
+        font-weight: bold;
+    }
+
+
+    .grammar-drop-message {
+        min-height: 32px;
+
+        display: flex;
+
+        flex-direction: column;
+
+        align-items: center;
+        justify-content: center;
+
+        padding: 5px 8px;
+
+        border-radius: 8px;
+
+        background:
+                rgba(255, 255, 255, 0.04);
+
+        color: #e2e8f0;
+
+        text-align: center;
+    }
+
+
+.touch-grammar-hint {
+    display: none;
+}
+
+
+.grammar-drop-zone.drag-over {
+    transform:
+            scale(1.04);
+
+    background:
+            rgba(159, 122, 234, 0.12);
+
+    box-shadow:
+            0 8px 25px
+            rgba(0, 0, 0, 0.4);
+}
+
+
+.grammar-drop-zone.drag-over
+.grammar-drop-inner {
+    background:
+            rgba(159, 122, 234, 0.15);
+}
+
+
+.grammar-added-text {
+    color: #68d391;
+
+    font-weight: bold;
+
+    font-size: 1.05rem;
 }
 
 
@@ -314,11 +701,14 @@
 
 .test-area {
     width: 100%;
+
     max-width: 1000px;
 
-    margin: 25px auto 50px;
+    margin:
+            25px auto 50px;
 
-    padding: 0 20px;
+    padding:
+            0 20px;
 
     text-align: center;
 }
@@ -327,7 +717,8 @@
 /* ===== НОМЕР ВОПРОСА ===== */
 
 .question-number {
-    margin: 15px 0;
+    margin:
+            15px 0;
 
     font-size: 20px;
 
@@ -344,7 +735,8 @@
 
     height: 18px;
 
-    margin: 15px auto 20px;
+    margin:
+            15px auto 20px;
 
     background: #4a5568;
 
@@ -357,18 +749,21 @@
             rgba(0, 0, 0, 0.35);
 }
 
+
 .progress-fill {
     height: 100%;
 
-    background: linear-gradient(
-            135deg,
-            #805ad5,
-            #9f7aea
-    );
+    background:
+            linear-gradient(
+                    135deg,
+                    #805ad5,
+                    #9f7aea
+            );
 
     border-radius: 12px;
 
-    transition: width 0.3s ease;
+    transition:
+            width 0.3s ease;
 }
 
 
@@ -377,7 +772,8 @@
 .timer {
     min-height: 35px;
 
-    margin: 15px 0 35px;
+    margin:
+            15px 0 35px;
 
     font-size: 25px;
 
@@ -390,10 +786,12 @@
             transform 0.3s;
 }
 
+
 .timer-warning {
     color: #f56565;
 
-    transform: scale(1.08);
+    transform:
+            scale(1.08);
 }
 
 
@@ -403,10 +801,12 @@
     min-height: 100px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
-    margin: 0 0 35px;
+    margin:
+            0 0 35px;
 
     font-size: 5rem;
 
@@ -430,21 +830,27 @@
     width: 100%;
 
     display: flex;
+
     justify-content: center;
+
     align-items: stretch;
 
     flex-wrap: wrap;
 
     gap: 15px;
 
-    margin: 0 auto;
+    margin:
+            0 auto;
 }
+
 
 .answer-btn {
     min-width: 170px;
+
     max-width: 260px;
 
-    padding: 12px 22px;
+    padding:
+            12px 22px;
 
     font-size: 18px;
 
@@ -466,6 +872,7 @@
             rgba(56, 161, 105, 0.45);
 }
 
+
 .styled-btn.wrong-answer {
     background: #e53e3e;
 
@@ -485,6 +892,7 @@
     text-align: center;
 }
 
+
 .correct,
 .wrong {
     margin-top: 15px;
@@ -494,16 +902,20 @@
     font-weight: bold;
 }
 
+
 .correct {
     color: #48bb78;
 }
+
 
 .wrong {
     color: #f56565;
 }
 
+
 .correct-answer-text {
-    margin: 12px 0 15px;
+    margin:
+            12px 0 15px;
 
     font-size: 18px;
 
@@ -526,17 +938,20 @@
 
 .test-result-card {
     width: 100%;
+
     max-width: 550px;
 
-    margin: 45px auto 0;
+    margin:
+            45px auto 0;
 
     padding: 35px;
 
-    background: linear-gradient(
-            135deg,
-            #4a5568,
-            #2d3748
-    );
+    background:
+            linear-gradient(
+                    135deg,
+                    #4a5568,
+                    #2d3748
+            );
 
     border-radius: 16px;
 
@@ -544,6 +959,7 @@
             0 10px 30px
             rgba(0, 0, 0, 0.45);
 }
+
 
 .test-result-title {
     margin-bottom: 20px;
@@ -553,29 +969,36 @@
     color: #9f7aea;
 }
 
+
 .test-result-percent {
-    margin: 10px 0 20px;
+    margin:
+            10px 0 20px;
 
     font-size: 64px;
 
     font-weight: bold;
 }
 
+
 .test-result-percent.passed {
     color: #48bb78;
 }
+
 
 .test-result-percent.failed {
     color: #f56565;
 }
 
+
 .test-result-text {
-    margin: 10px 0;
+    margin:
+            10px 0;
 
     font-size: 20px;
 
     color: #f7fafc;
 }
+
 
 .test-result-message {
     margin-top: 20px;
@@ -585,127 +1008,14 @@
     line-height: 1.5;
 }
 
+
 .passed-message {
     color: #68d391;
 }
 
+
 .failed-message {
     color: #fc8181;
-}
-
-
-/* =========================================================
-   АДАПТАЦИЯ ТЕСТА
-   ========================================================= */
-
-@media (max-width: 700px) {
-    .test-word {
-        font-size: 3.5rem;
-    }
-
-    .answers-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .answer-btn {
-        width: 100%;
-        max-width: 350px;
-    }
-
-    .test-result-card {
-        padding: 25px 15px;
-    }
-
-    .test-result-percent {
-        font-size: 52px;
-    }
-}
-
-
-/* =========================================================
-   СТАТИСТИКА
-   ========================================================= */
-
-.stats-column {
-    flex: 1;
-
-    display: flex;
-    flex-direction: column;
-
-    align-items: center;
-}
-
-.stat-card {
-    max-width: 500px;
-
-    margin: 10px auto;
-
-    padding: 15px 20px;
-
-    background: linear-gradient(
-            135deg,
-            #4a5568,
-            #2d3748
-    );
-
-    border-radius: 12px;
-
-    box-shadow:
-            0 6px 15px
-            rgba(0, 0, 0, 0.5);
-
-    transition:
-            transform 0.3s,
-            box-shadow 0.3s;
-}
-
-.stat-card:hover {
-    transform: translateY(-5px);
-
-    box-shadow:
-            0 10px 25px
-            rgba(0, 0, 0, 0.6);
-}
-
-.stat-card .level-name {
-    color: #9f7aea;
-
-    text-align: center;
-}
-
-.stat-card .percent {
-    font-size: 22px;
-
-    color: #9f7aea;
-
-    font-weight: bold;
-
-    text-align: center;
-}
-
-.stat-card .details {
-    font-size: 16px;
-
-    color: #cbd5e1;
-}
-
-.stat-progress {
-    width: 100%;
-
-    height: 16px;
-
-    background: #4a5568;
-
-    border-radius: 10px;
-
-    overflow: hidden;
-}
-
-.stat-progress-fill {
-    height: 100%;
-
-    transition: width 0.3s ease;
 }
 
 
@@ -725,22 +1035,112 @@
     margin-top: 30px;
 }
 
-.test-result-actions .styled-btn {
+
+.test-result-actions
+.styled-btn {
     min-width: 190px;
 }
 
-@media (max-width: 700px) {
-    .test-result-actions {
-        flex-direction: column;
 
-        align-items: center;
-    }
+/* =========================================================
+   СТАРЫЕ СТИЛИ СТАТИСТИКИ
+   ========================================================= */
 
-    .test-result-actions .styled-btn {
-        width: 100%;
+.stats-column {
+    flex: 1;
 
-        max-width: 320px;
-    }
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+
+.stat-card {
+    max-width: 500px;
+
+    margin:
+            10px auto;
+
+    padding:
+            15px 20px;
+
+    background:
+            linear-gradient(
+                    135deg,
+                    #4a5568,
+                    #2d3748
+            );
+
+    border-radius: 12px;
+
+    box-shadow:
+            0 6px 15px
+            rgba(0, 0, 0, 0.5);
+
+    transition:
+            transform 0.3s,
+            box-shadow 0.3s;
+}
+
+
+.stat-card:hover {
+    transform:
+            translateY(-5px);
+
+    box-shadow:
+            0 10px 25px
+            rgba(0, 0, 0, 0.6);
+}
+
+
+.stat-card
+.level-name {
+    color: #9f7aea;
+
+    text-align: center;
+}
+
+
+.stat-card
+.percent {
+    font-size: 22px;
+
+    color: #9f7aea;
+
+    font-weight: bold;
+
+    text-align: center;
+}
+
+
+.stat-card
+.details {
+    font-size: 16px;
+
+    color: #cbd5e1;
+}
+
+
+.stat-progress {
+    width: 100%;
+
+    height: 16px;
+
+    background: #4a5568;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+
+.stat-progress-fill {
+    height: 100%;
+
+    transition:
+            width 0.3s ease;
 }
 
 
@@ -749,12 +1149,15 @@
    ========================================================= */
 
 .statistics-page {
-    width: min(1200px, 92%);
+    width:
+            min(1200px, 92%);
 
-    margin: 40px auto;
+    margin:
+            40px auto;
 
     padding-bottom: 50px;
 }
+
 
 .statistics-title {
     text-align: center;
@@ -763,6 +1166,7 @@
 
     font-size: 2rem;
 }
+
 
 .statistics-container {
     display: grid;
@@ -774,6 +1178,7 @@
 
     align-items: start;
 }
+
 
 .statistics-category {
     padding: 20px;
@@ -788,6 +1193,7 @@
             rgba(0, 0, 0, 0.25);
 }
 
+
 .statistics-category h3 {
     text-align: center;
 
@@ -795,6 +1201,7 @@
 
     font-size: 1.4rem;
 }
+
 
 .statistics-level {
     margin-bottom: 18px;
@@ -807,9 +1214,11 @@
             rgba(255, 255, 255, 0.06);
 }
 
+
 .statistics-level:last-child {
     margin-bottom: 0;
 }
+
 
 .statistics-level-header {
     display: flex;
@@ -821,11 +1230,13 @@
     margin-bottom: 10px;
 }
 
+
 .statistics-level-header span {
     font-weight: bold;
 
     font-size: 1.1rem;
 }
+
 
 .statistics-progress {
     width: 100%;
@@ -842,12 +1253,14 @@
             rgba(255, 255, 255, 0.12);
 }
 
+
 .statistics-progress-fill {
     height: 100%;
 
     border-radius: inherit;
 
-    transition: width 0.4s ease;
+    transition:
+            width 0.4s ease;
 }
 
 
@@ -871,9 +1284,12 @@
     background: #e53e3e;
 }
 
+
 .statistics-level p {
-    margin: 6px 0;
+    margin:
+            6px 0;
 }
+
 
 .statistics-date,
 .statistics-attempts {
@@ -882,6 +1298,7 @@
     opacity: 0.75;
 }
 
+
 .statistics-empty,
 .statistics-no-results {
     text-align: center;
@@ -889,11 +1306,14 @@
     opacity: 0.7;
 }
 
+
 .clear-statistics-btn {
     display: block;
 
-    margin: 30px auto 0;
+    margin:
+            30px auto 0;
 }
+
 
 .nav-link-button {
     padding: 0;
@@ -909,8 +1329,50 @@
     cursor: pointer;
 }
 
+
 .nav-link-button:hover {
     opacity: 0.8;
+}
+
+/* =========================================================
+   GRAMMAR RESPONSIVE
+   ========================================================= */
+
+/*
+ * На компьютере поле Grammar остаётся
+ * закреплённым в правом нижнем углу.
+ *
+ * Оно не влияет на ширину card-container.
+ */
+
+
+/* =========================================================
+   TOUCH DEVICES
+   ========================================================= */
+
+@media (pointer: coarse) {
+    .desktop-grammar-hint {
+        display: none;
+    }
+
+    .touch-grammar-hint {
+        display: inline;
+    }
+
+    .grammar-card-indicator:hover {
+        background: #9f7aea;
+        transform: none;
+    }
+
+    .grammar-card-indicator:hover
+    .grammar-indicator-check {
+        display: inline;
+    }
+
+    .grammar-card-indicator:hover
+    .grammar-indicator-remove {
+        display: none;
+    }
 }
 
 
@@ -957,5 +1419,76 @@
         max-height: 70vh;
 
         overflow-y: auto;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    /* ===== GRAMMAR ===== */
+
+    .grammar-drop-zone {
+        position: static;
+
+        width: min(
+                350px,
+                calc(100% - 30px)
+        );
+
+        margin: 20px auto;
+    }
+
+
+    /*
+     * На мобильном Grammar уже не fixed,
+     * поэтому большой нижний отступ не нужен.
+     */
+
+    .card-container {
+        padding-bottom: 30px;
+    }
+
+
+    /* ===== TEST ===== */
+
+    .test-word {
+        font-size: 3.5rem;
+    }
+
+    .answers-container {
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+    .answer-btn {
+        width: 100%;
+
+        max-width: 350px;
+    }
+
+    .test-result-card {
+        padding: 25px 15px;
+    }
+
+    .test-result-percent {
+        font-size: 52px;
+    }
+
+    .test-result-actions {
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+    .test-result-actions
+    .styled-btn {
+        width: 100%;
+
+        max-width: 320px;
     }
 }
