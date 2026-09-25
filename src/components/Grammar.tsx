@@ -18,6 +18,8 @@ import type {
     VerbGrammar,
 } from "../types/grammar";
 
+import { Link } from "react-router-dom";
+
 
 type FormItem = {
     label: string;
@@ -836,17 +838,28 @@ function Grammar() {
                     </strong>
                 </p>
 
-                {count > 0 && (
-                    <button
-                        type="button"
-                        className="grammar-clear-btn"
-                        onClick={
-                            handleClearGrammar
-                        }
-                    >
-                        Очистить всё
-                    </button>
-                )}
+                <div className="grammar-page-toolbar-actions">
+                    {verbs.length > 0 && (
+                        <Link
+                            to="/grammar/test"
+                            className="grammar-test-btn"
+                        >
+                            Тест по глаголам
+                        </Link>
+                    )}
+
+                    {count > 0 && (
+                        <button
+                            type="button"
+                            className="grammar-clear-btn"
+                            onClick={
+                                handleClearGrammar
+                            }
+                        >
+                            Очистить всё
+                        </button>
+                    )}
+                </div>
             </div>
 
 

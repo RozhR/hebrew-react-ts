@@ -22,6 +22,11 @@ const Grammar = lazy(
 );
 
 
+const GrammarTest = lazy(
+    () => import("./components/GrammarTest"),
+);
+
+
 function App() {
     return (
         <>
@@ -49,6 +54,21 @@ function App() {
                             }
                         >
                             <Grammar />
+                        </Suspense>
+                    }
+                />
+
+                <Route
+                    path="/grammar/test"
+                    element={
+                        <Suspense
+                            fallback={
+                                <div className="grammar-loading">
+                                    Загрузка теста...
+                                </div>
+                            }
+                        >
+                            <GrammarTest />
                         </Suspense>
                     }
                 />

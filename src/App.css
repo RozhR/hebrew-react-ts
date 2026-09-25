@@ -2120,3 +2120,312 @@
         font-size: 17px;
     }
 }
+
+/* =========================================================
+   GRAMMAR TEST
+   ========================================================= */
+
+.grammar-test-page {
+    width: min(1000px, 92%);
+
+    margin:
+            40px auto 70px;
+}
+
+
+.grammar-page-toolbar-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+
+.grammar-test-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding:
+            8px 15px;
+
+    border-radius: 8px;
+
+    background: #805ad5;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition:
+            transform 0.2s ease,
+            opacity 0.2s ease;
+}
+
+
+.grammar-test-btn:hover {
+    transform:
+            translateY(-2px);
+
+    opacity: 0.9;
+}
+
+
+.grammar-test-setup {
+    max-width: 650px;
+
+    margin:
+            30px auto;
+
+    padding: 25px;
+
+    border-radius: 14px;
+
+    background:
+            rgba(255, 255, 255, 0.05);
+
+    box-shadow:
+            0 4px 15px
+            rgba(0, 0, 0, 0.25);
+}
+
+
+.grammar-test-selected {
+    margin-bottom: 25px;
+
+    font-size: 18px;
+}
+
+
+.grammar-test-selected strong {
+    color: #9f7aea;
+}
+
+
+.grammar-test-setup h3 {
+    margin:
+            20px 0 12px;
+
+    color: #d6bcfa;
+}
+
+
+.grammar-test-sections {
+    display: grid;
+
+    grid-template-columns:
+            repeat(
+                    2,
+                    minmax(0, 1fr)
+            );
+
+    gap: 10px;
+}
+
+
+.grammar-test-option {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding:
+            12px 14px;
+
+    border-left:
+            3px solid
+            #9f7aea;
+
+    border-radius: 9px;
+
+    background:
+            rgba(255, 255, 255, 0.06);
+
+    cursor: pointer;
+}
+
+
+.grammar-test-option input {
+    width: 18px;
+    height: 18px;
+
+    accent-color:
+            #9f7aea;
+}
+
+
+.grammar-test-select {
+    width: 100%;
+
+    padding:
+            11px 12px;
+
+    border:
+            1px solid
+            rgba(159, 122, 234, 0.45);
+
+    border-radius: 8px;
+
+    background: #394558;
+
+    color: #f7fafc;
+
+    font: inherit;
+}
+
+
+.grammar-test-setup-actions {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    margin-top: 25px;
+
+    flex-wrap: wrap;
+}
+
+
+/* ===== ВОПРОС ===== */
+
+.grammar-test-question {
+    margin:
+            10px auto 30px;
+
+    padding: 20px;
+
+    border-radius: 14px;
+
+    background:
+            rgba(255, 255, 255, 0.05);
+}
+
+
+.grammar-test-infinitive {
+    margin: 0;
+
+    color: #d6bcfa;
+
+    font-size: 3rem;
+
+    text-align: center;
+}
+
+
+.grammar-test-translation {
+    margin:
+            8px 0 20px;
+
+    color: #b8c4d6;
+
+    font-size: 18px;
+
+    text-align: center;
+}
+
+
+.grammar-test-task {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 18px;
+
+    padding:
+            12px;
+
+    border-left:
+            3px solid
+            #9f7aea;
+
+    border-radius: 9px;
+
+    background:
+            rgba(255, 255, 255, 0.06);
+}
+
+
+.grammar-test-task span {
+    color: #d6bcfa;
+
+    font-size: 18px;
+
+    font-weight: 700;
+}
+
+
+.grammar-test-task strong {
+    color: #ffffff;
+
+    font-size: 24px;
+}
+
+
+.grammar-answer-btn {
+    font-size: 22px;
+
+    min-width: 180px;
+}
+
+
+/* =========================================================
+   GRAMMAR TEST MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+    .grammar-page-toolbar-actions {
+        width: 100%;
+
+        flex-direction: column;
+    }
+
+
+    .grammar-test-btn,
+    .grammar-clear-btn {
+        width: 100%;
+    }
+
+
+    .grammar-test-sections {
+        grid-template-columns: 1fr;
+    }
+
+
+    .grammar-test-setup-actions {
+        flex-direction: column;
+    }
+
+
+    .grammar-test-setup-actions
+    .styled-btn {
+        width: 100%;
+    }
+
+
+    .grammar-test-infinitive {
+        font-size: 2.5rem;
+    }
+
+
+    .grammar-test-task {
+        flex-direction: column;
+
+        gap: 7px;
+    }
+
+
+    .grammar-answer-btn {
+        width: 100%;
+
+        max-width: 350px;
+    }
+}

@@ -7,6 +7,10 @@ import type {
     TestStats,
 } from "../types";
 
+import {
+    unlockNextLevel,
+} from "../utils/progress";
+
 interface TestProps {
     words: CardData[];
     category: Category;
@@ -168,6 +172,13 @@ export function Test({
             level,
             attempt,
         );
+
+        if (percent >= 85) {
+            unlockNextLevel(
+                category,
+                level,
+            );
+        }
 
         setIsFinished(true);
     };

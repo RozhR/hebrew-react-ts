@@ -87,9 +87,8 @@ function Navbar() {
                     (category) => (
                         <li
                             className="dropdown"
-                            key={
-                                category.category
-                            }
+                            key={category.category}
+                            onMouseLeave={closeMenu}
                         >
                             <button
                                 type="button"

@@ -104,6 +104,15 @@ function Statistics() {
                                                             ? current
                                                             : best,
                                                 );
+                                            const averagePercent =
+                                                Math.round(
+                                                    attempts.reduce(
+                                                        (sum, attempt) =>
+                                                            sum + attempt.percent,
+                                                        0,
+                                                    ) /
+                                                    attempts.length,
+                                                );
 
                                             const progressClass =
                                                 bestAttempt.percent >=
@@ -171,6 +180,12 @@ function Statistics() {
                                                         {
                                                             attempts.length
                                                         }
+                                                        {" · "}
+                                                        Средний балл:{" "}
+                                                        {
+                                                            averagePercent
+                                                        }
+                                                        %
                                                     </p>
                                                 </div>
                                             );
