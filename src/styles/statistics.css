@@ -90,15 +90,15 @@
 }
 
 .progress-good {
-    background: #38a169;
+    background: var(--color-success);
 }
 
 .progress-medium {
-    background: #d69e2e;
+    background: var(--color-warning);
 }
 
 .progress-low {
-    background: #e53e3e;
+    background: var(--color-error);
 }
 
 .statistics-level p {

@@ -5,6 +5,8 @@ export interface CategoryConfig {
     levels: number;
 }
 
+export const CARDS_PER_LEVEL = 20;
+
 export const CATEGORY_CONFIG: Record<Category, CategoryConfig> = {
     verbs: {
         title: "Глаголы",
@@ -21,3 +23,7 @@ export const CATEGORY_CONFIG: Record<Category, CategoryConfig> = {
 };
 
 export const CATEGORIES = Object.keys(CATEGORY_CONFIG) as Category[];
+
+export function isCategory(value: unknown): value is Category {
+    return typeof value === "string" && CATEGORIES.includes(value as Category);
+}

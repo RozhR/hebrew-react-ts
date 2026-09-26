@@ -13,8 +13,6 @@ import adverbsUsage from "../data/grammar/adverbs/usage.json";
 import adverbsRelations from "../data/grammar/adverbs/relations.json";
 import adverbsExamples from "../data/grammar/adverbs/examples.json";
 
-import type { Category } from "../types";
-
 import type { AdjectiveGrammar, AdverbGrammar, VerbGrammar } from "../types/grammar";
 
 function findById<T extends { id: number }>(items: T[], id: number): T | undefined {
@@ -82,17 +80,4 @@ export function getAdverbGrammar(id: number): AdverbGrammar | undefined {
         relation,
         examples,
     };
-}
-
-export function getGrammarWord(category: Category, id: number) {
-    switch (category) {
-        case "verbs":
-            return getVerbGrammar(id);
-
-        case "adjectives":
-            return getAdjectiveGrammar(id);
-
-        case "adverbs":
-            return getAdverbGrammar(id);
-    }
 }

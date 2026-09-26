@@ -3,29 +3,15 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 import CardList from "./CardList";
 import { Test } from "./Test";
 
-import { verbsData } from "../data/verbs";
+import { CARDS_PER_LEVEL, CATEGORY_CONFIG, isCategory } from "../config/categories";
+
 import { adjectivesData } from "../data/adjectives";
 import { adverbsData } from "../data/adverbs";
+import { verbsData } from "../data/verbs";
 
 import { isLevelUnlocked } from "../utils/progress";
 
 import type { Category } from "../types";
-
-const categoryTitles: Record<Category, string> = {
-    verbs: "Глаголы",
-    adjectives: "Прилагательные",
-    adverbs: "Наречия",
-};
-
-const categoryLevels: Record<Category, number> = {
-    verbs: 25,
-    adjectives: 25,
-    adverbs: 15,
-};
-
-function isCategory(value: string | undefined): value is Category {
-    return value === "verbs" || value === "adjectives" || value === "adverbs";
-}
 
 function getCards(category: Category, level: number) {
     switch (category) {
@@ -55,7 +41,9 @@ function LearningPage({ testMode = false }: LearningPageProps) {
 
     const level = Number(levelParam);
 
-    const maxLevel = categoryLevels[categoryParam];
+    const categoryConfig = CATEGORY_CONFIG[categoryParam];
+
+    const maxLevel = categoryConfig.levels;
 
     if (!Number.isInteger(level) || level < 1 || level > maxLevel) {
         return <Navigate to={`/${categoryParam}/1`} replace />;
@@ -70,15 +58,13 @@ function LearningPage({ testMode = false }: LearningPageProps) {
     const cardsWithIds = cards.map((card, index) => ({
         ...card,
 
-        id: (level - 1) * 20 + index + 1,
+        id: (level - 1) * CARDS_PER_LEVEL + index + 1,
     }));
-
-    const categoryTitle = categoryTitles[categoryParam];
 
     return (
         <>
             <h2 className="level-title">
-                {categoryTitle} — Уровень {level}
+                {categoryConfig.title} — Уровень {level}
             </h2>
 
             {testMode ? (

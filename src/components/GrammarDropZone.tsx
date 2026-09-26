@@ -1,17 +1,9 @@
 import { type DragEvent, useState } from "react";
 
+import { isCategory } from "../config/categories";
 import { useGrammar } from "../context/GrammarContext";
 
-import type { Category } from "../types";
-
-type DraggedGrammarWord = {
-    category: Category;
-    id: number;
-};
-
-function isCategory(value: unknown): value is Category {
-    return value === "verbs" || value === "adjectives" || value === "adverbs";
-}
+import type { GrammarWordRef } from "../types/grammar";
 
 function GrammarDropZone() {
     const [isDraggingOver, setIsDraggingOver] = useState(false);
@@ -60,7 +52,7 @@ function GrammarDropZone() {
                 return;
             }
 
-            const grammarWord: DraggedGrammarWord = {
+            const grammarWord: GrammarWordRef = {
                 category: word.category,
                 id: word.id,
             };

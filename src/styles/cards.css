@@ -337,7 +337,7 @@
 }
 
 .grammar-added-text {
-    color: #68d391;
+    color: var(--color-success-soft);
 
     font-size: 1.05rem;
     font-weight: bold;

@@ -79,7 +79,7 @@
 
 .grammar-clear-btn,
 .grammar-remove-btn {
-    background: #c53030;
+    background: var(--color-error-dark);
 }
 
 .grammar-details-btn {
@@ -264,7 +264,7 @@
 
     margin-bottom: 6px;
 
-    color: #b9c3d3;
+    color: var(--color-text-secondary);
 
     font-size: 14px;
 }
@@ -322,7 +322,7 @@
 .grammar-example-translation {
     margin: 0;
 
-    color: #b8c4d6;
+    color: var(--color-text-subtle);
 
     font-size: 17px;
     line-height: 1.45;
@@ -534,7 +534,7 @@
     border: 1px solid rgba(159, 122, 234, 0.45);
     border-radius: 8px;
 
-    background: #394558;
+    background: var(--color-bg-input);
     color: var(--color-text-light);
 
     font: inherit;
@@ -575,7 +575,7 @@
 .grammar-test-translation {
     margin: 8px 0 20px;
 
-    color: #b8c4d6;
+    color: var(--color-text-subtle);
 
     font-size: 18px;
     text-align: center;
@@ -660,6 +660,12 @@
     .grammar-info-grid,
     .grammar-forms-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grammar-tense-table-wrapper {
+        overflow-x: auto;
+
+        -webkit-overflow-scrolling: touch;
     }
 
     .grammar-tense-table {

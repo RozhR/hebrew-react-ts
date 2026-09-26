@@ -40,7 +40,7 @@ export const GRAMMAR_TEST_SECTIONS: GrammarTestSection[] = [
     "imperative",
 ];
 
-export function shuffleArray<T>(array: T[]): T[] {
+function shuffleArray<T>(array: T[]): T[] {
     const result = [...array];
 
     for (let i = result.length - 1; i > 0; i--) {
