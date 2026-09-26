@@ -21,7 +21,7 @@ export const adverbsData: Record<number, CardData[]> = {
         { hebrew: "עדיין", russian: "всё ещё" },
         { hebrew: "אחר כך", russian: "потом, после этого" },
         { hebrew: "קודם", russian: "сначала, раньше, прежде" },
-        { hebrew: "מיד", russian: "сразу, немедленно" }
+        { hebrew: "מיד", russian: "сразу, немедленно" },
     ],
     2: [
         { hebrew: "יחד", russian: "вместе" },
@@ -43,7 +43,7 @@ export const adverbsData: Record<number, CardData[]> = {
         { hebrew: "פתאום", russian: "внезапно" },
         { hebrew: "תכף", russian: "сейчас, вот-вот, скоро" },
         { hebrew: "כרגע", russian: "сейчас, в данный момент" },
-        { hebrew: "בקרוב", russian: "скоро" }
+        { hebrew: "בקרוב", russian: "скоро" },
     ],
     3: [
         { hebrew: "אתמול", russian: "вчера" },
@@ -65,7 +65,7 @@ export const adverbsData: Record<number, CardData[]> = {
         { hebrew: "יותר מדי", russian: "слишком, слишком много" },
         { hebrew: "די", russian: "довольно, достаточно" },
         { hebrew: "לפחות", russian: "по крайней мере" },
-        { hebrew: "בערך", russian: "примерно" }
+        { hebrew: "בערך", russian: "примерно" },
     ],
     4: [
         { hebrew: "יחסית", russian: "относительно, сравнительно" },
@@ -87,7 +87,7 @@ export const adverbsData: Record<number, CardData[]> = {
         { hebrew: "למטה", russian: "внизу, вниз" },
         { hebrew: "קדימה", russian: "вперёд" },
         { hebrew: "אחורה", russian: "назад" },
-        { hebrew: "ימינה", russian: "направо" }
+        { hebrew: "ימינה", russian: "направо" },
     ],
     5: [
         { hebrew: "שמאלה", russian: "налево" },
@@ -109,7 +109,7 @@ export const adverbsData: Record<number, CardData[]> = {
         { hebrew: "בלילה", russian: "ночью" },
         { hebrew: "לכן", russian: "поэтому" },
         { hebrew: "בכל זאת", russian: "всё же, несмотря на это" },
-        { hebrew: "בנוסף", russian: "кроме того" }
+        { hebrew: "בנוסף", russian: "кроме того" },
     ],
     6: [
         { hebrew: "אגב", russian: "кстати" },
@@ -131,7 +131,7 @@ export const adverbsData: Record<number, CardData[]> = {
         { hebrew: "בעבר", russian: "в прошлом, раньше" },
         { hebrew: "בעתיד", russian: "в будущем" },
         { hebrew: "מעכשיו", russian: "отныне, с этого момента" },
-        { hebrew: "לעת עתה", russian: "пока, на данный момент" }
+        { hebrew: "לעת עתה", russian: "пока, на данный момент" },
     ],
     7: [
         { hebrew: "בזמן", russian: "вовремя" },
@@ -153,7 +153,7 @@ export const adverbsData: Record<number, CardData[]> = {
         { hebrew: "מלמעלה", russian: "сверху" },
         { hebrew: "מלמטה", russian: "снизу" },
         { hebrew: "מאחור", russian: "сзади, позади" },
-        { hebrew: "מבפנים", russian: "изнутри" }
+        { hebrew: "מבפנים", russian: "изнутри" },
     ],
     8: [
         { hebrew: "מבחוץ", russian: "снаружи, извне" },
@@ -175,7 +175,7 @@ export const adverbsData: Record<number, CardData[]> = {
         { hebrew: "בעיקרון", russian: "в принципе" },
         { hebrew: "באופן כללי", russian: "в целом" },
         { hebrew: "ממילא", russian: "всё равно, в любом случае" },
-        { hebrew: "לדעתי", russian: "по моему мнению" }
+        { hebrew: "לדעתי", russian: "по моему мнению" },
     ],
     9: [
         { hebrew: "מבחינתי", russian: "с моей точки зрения, что касается меня" },
@@ -197,7 +197,7 @@ export const adverbsData: Record<number, CardData[]> = {
         { hebrew: "במקרה", russian: "случайно" },
         { hebrew: "בחינם", russian: "бесплатно" },
         { hebrew: "ישירות", russian: "непосредственно, напрямую" },
-        { hebrew: "ברצינות", russian: "серьёзно" }
+        { hebrew: "ברצינות", russian: "серьёзно" },
     ],
     10: [
         { hebrew: "בכנות", russian: "честно, искренне" },
@@ -219,7 +219,7 @@ export const adverbsData: Record<number, CardData[]> = {
         { hebrew: "לאט לאט", russian: "постепенно, понемногу" },
         { hebrew: "אחד אחד", russian: "по одному, один за другим" },
         { hebrew: "בנפרד", russian: "отдельно" },
-        { hebrew: "לחוד", russian: "отдельно, порознь" }
+        { hebrew: "לחוד", russian: "отдельно, порознь" },
     ],
     11: [
         { hebrew: "איכשהו", russian: "как-то, каким-то образом" },
@@ -241,7 +241,7 @@ export const adverbsData: Record<number, CardData[]> = {
         { hebrew: "נפשית", russian: "психологически, душевно" },
         { hebrew: "כלכלית", russian: "экономически" },
         { hebrew: "חברתית", russian: "социально" },
-        { hebrew: "אוטומטית", russian: "автоматически" }
+        { hebrew: "אוטומטית", russian: "автоматически" },
     ],
     12: [
         { hebrew: "ידנית", russian: "вручную" },
@@ -263,7 +263,7 @@ export const adverbsData: Record<number, CardData[]> = {
         { hebrew: "בממוצע", russian: "в среднем" },
         { hebrew: "בסך הכול", russian: "всего, в общей сложности" },
         { hebrew: "לכל היותר", russian: "максимум, не более" },
-        { hebrew: "לכל הפחות", russian: "как минимум, не менее" }
+        { hebrew: "לכל הפחות", russian: "как минимум, не менее" },
     ],
     13: [
         { hebrew: "פי שניים", russian: "вдвое" },
@@ -285,7 +285,7 @@ export const adverbsData: Record<number, CardData[]> = {
         { hebrew: "מעולם", russian: "когда-либо; никогда в отрицании" },
         { hebrew: "לעולם", russian: "навсегда; никогда в конструкции" },
         { hebrew: "לעולם לא", russian: "никогда" },
-        { hebrew: "תחילה", russian: "сначала, первоначально" }
+        { hebrew: "תחילה", russian: "сначала, первоначально" },
     ],
     14: [
         { hebrew: "קודם לכן", russian: "ранее, до этого" },
@@ -307,7 +307,7 @@ export const adverbsData: Record<number, CardData[]> = {
         { hebrew: "מלפנים", russian: "спереди" },
         { hebrew: "מעבר לכך", russian: "кроме того, сверх этого" },
         { hebrew: "מעבר לזה", russian: "кроме того, помимо этого" },
-        { hebrew: "במקרה הטוב", russian: "в лучшем случае" }
+        { hebrew: "במקרה הטוב", russian: "в лучшем случае" },
     ],
     15: [
         { hebrew: "במקרה הרע", russian: "в худшем случае" },
@@ -329,6 +329,6 @@ export const adverbsData: Record<number, CardData[]> = {
         { hebrew: "בכל דרך", russian: "любым способом" },
         { hebrew: "בדרך אחרת", russian: "по-другому, иным способом" },
         { hebrew: "ללא הרף", russian: "непрерывно, без остановки" },
-        { hebrew: "אחת ולתמיד", russian: "раз и навсегда" }
-    ]
+        { hebrew: "אחת ולתמיד", russian: "раз и навсегда" },
+    ],
 };

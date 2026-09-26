@@ -21,7 +21,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "זקן", russian: "старый, пожилой (о человеке)" },
         { hebrew: "פשוט", russian: "простой" },
         { hebrew: "אפשרי", russian: "возможный" },
-        { hebrew: "בטוח", russian: "уверенный; безопасный" }
+        { hebrew: "בטוח", russian: "уверенный; безопасный" },
     ],
     2: [
         { hebrew: "ברור", russian: "ясный, понятный" },
@@ -43,7 +43,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "שונה", russian: "отличающийся, иной" },
         { hebrew: "דומה", russian: "похожий" },
         { hebrew: "רגיל", russian: "обычный, привычный" },
-        { hebrew: "אמיתי", russian: "настоящий, истинный" }
+        { hebrew: "אמיתי", russian: "настоящий, истинный" },
     ],
     3: [
         { hebrew: "מהיר", russian: "быстрый" },
@@ -65,7 +65,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "אישי", russian: "личный" },
         { hebrew: "ציבורי", russian: "общественный, публичный" },
         { hebrew: "פרטי", russian: "частный, личный" },
-        { hebrew: "מקומי", russian: "местный" }
+        { hebrew: "מקומי", russian: "местный" },
     ],
     4: [
         { hebrew: "מרכזי", russian: "центральный, основной" },
@@ -87,7 +87,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "מותר", russian: "разрешённый" },
         { hebrew: "אסור", russian: "запрещённый" },
         { hebrew: "מובן", russian: "понятный" },
-        { hebrew: "מוכר", russian: "знакомый, известный" }
+        { hebrew: "מוכר", russian: "знакомый, известный" },
     ],
     5: [
         { hebrew: "חכם", russian: "умный" },
@@ -109,7 +109,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "מדויק", russian: "точный" },
         { hebrew: "מוצלח", russian: "успешный, удачный" },
         { hebrew: "גרוע", russian: "плохой, ужасный" },
-        { hebrew: "טבעי", russian: "естественный, натуральный" }
+        { hebrew: "טבעי", russian: "естественный, натуральный" },
     ],
     6: [
         { hebrew: "מודרני", russian: "современный" },
@@ -131,7 +131,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "שימושי", russian: "полезный, практичный" },
         { hebrew: "רגשי", russian: "эмоциональный" },
         { hebrew: "נפשי", russian: "психический, душевный" },
-        { hebrew: "פיזי", russian: "физический" }
+        { hebrew: "פיזי", russian: "физический" },
     ],
     7: [
         { hebrew: "חברתי", russian: "социальный, общественный" },
@@ -153,7 +153,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "ימני", russian: "правый" },
         { hebrew: "שמאלי", russian: "левый" },
         { hebrew: "רחב", russian: "широкий" },
-        { hebrew: "צר", russian: "узкий" }
+        { hebrew: "צר", russian: "узкий" },
     ],
     8: [
         { hebrew: "עמוק", russian: "глубокий" },
@@ -175,7 +175,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "חריף", russian: "острый (о вкусе)" },
         { hebrew: "חמוץ", russian: "кислый" },
         { hebrew: "מר", russian: "горький" },
-        { hebrew: "שקט", russian: "тихий, спокойный" }
+        { hebrew: "שקט", russian: "тихий, спокойный" },
     ],
     9: [
         { hebrew: "רועש", russian: "шумный" },
@@ -197,7 +197,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "מפורסם", russian: "знаменитый, известный" },
         { hebrew: "פופולרי", russian: "популярный" },
         { hebrew: "נפוץ", russian: "распространённый" },
-        { hebrew: "נדיר", russian: "редкий" }
+        { hebrew: "נדיר", russian: "редкий" },
     ],
     10: [
         { hebrew: "מסוים", russian: "определённый, некоторый" },
@@ -219,7 +219,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "מהותי", russian: "существенный, принципиальный" },
         { hebrew: "סביר", russian: "разумный, приемлемый" },
         { hebrew: "רצוי", russian: "желательный" },
-        { hebrew: "הכרחי", russian: "необходимый" }
+        { hebrew: "הכרחי", russian: "необходимый" },
     ],
     11: [
         { hebrew: "חיוני", russian: "жизненно необходимый, существенный" },
@@ -241,7 +241,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "נאמן", russian: "верный, преданный" },
         { hebrew: "כנה", russian: "искренний, честный" },
         { hebrew: "נחוש", russian: "решительный" },
-        { hebrew: "עקשן", russian: "упрямый" }
+        { hebrew: "עקשן", russian: "упрямый" },
     ],
     12: [
         { hebrew: "קנאי", russian: "ревнивый; фанатичный" },
@@ -263,7 +263,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "חי", russian: "живой" },
         { hebrew: "מת", russian: "мёртвый" },
         { hebrew: "חיובי", russian: "положительный" },
-        { hebrew: "שלילי", russian: "отрицательный" }
+        { hebrew: "שלילי", russian: "отрицательный" },
     ],
     13: [
         { hebrew: "הוגן", russian: "справедливый, честный" },
@@ -285,7 +285,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "צפוף", russian: "тесный, плотный, переполненный" },
         { hebrew: "בולט", russian: "заметный, выделяющийся" },
         { hebrew: "עדין", russian: "нежный, деликатный" },
-        { hebrew: "מוצק", russian: "твёрдый" }
+        { hebrew: "מוצק", russian: "твёрдый" },
     ],
     14: [
         { hebrew: "שביר", russian: "хрупкий" },
@@ -307,7 +307,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "בינלאומי", russian: "международный" },
         { hebrew: "עולמי", russian: "мировой, глобальный" },
         { hebrew: "עירוני", russian: "городской" },
-        { hebrew: "כפרי", russian: "сельский" }
+        { hebrew: "כפרי", russian: "сельский" },
     ],
     15: [
         { hebrew: "ביתי", russian: "домашний" },
@@ -329,7 +329,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "אלקטרוני", russian: "электронный" },
         { hebrew: "תעשייתי", russian: "промышленный" },
         { hebrew: "מקורי", russian: "оригинальный" },
-        { hebrew: "מסורתי", russian: "традиционный" }
+        { hebrew: "מסורתי", russian: "традиционный" },
     ],
     16: [
         { hebrew: "חדשני", russian: "инновационный" },
@@ -351,7 +351,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "ממשי", russian: "реальный, фактический" },
         { hebrew: "חלופי", russian: "альтернативный" },
         { hebrew: "הדדי", russian: "взаимный" },
-        { hebrew: "משותף", russian: "общий, совместный" }
+        { hebrew: "משותף", russian: "общий, совместный" },
     ],
     17: [
         { hebrew: "נפרד", russian: "отдельный" },
@@ -373,7 +373,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "מועיל", russian: "полезный" },
         { hebrew: "חסכוני", russian: "экономичный" },
         { hebrew: "יוקרתי", russian: "престижный, роскошный" },
-        { hebrew: "מפואר", russian: "роскошный, великолепный" }
+        { hebrew: "מפואר", russian: "роскошный, великолепный" },
     ],
     18: [
         { hebrew: "מפורט", russian: "подробный" },
@@ -395,7 +395,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "אזורי", russian: "региональный" },
         { hebrew: "סביבתי", russian: "экологический, относящийся к окружающей среде" },
         { hebrew: "גלובלי", russian: "глобальный" },
-        { hebrew: "קהילתי", russian: "общинный, общественный" }
+        { hebrew: "קהילתי", russian: "общинный, общественный" },
     ],
     19: [
         { hebrew: "ארגוני", russian: "организационный" },
@@ -417,7 +417,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "כמותי", russian: "количественный" },
         { hebrew: "איכותני", russian: "качественный (о методе исследования)" },
         { hebrew: "אובייקטיבי", russian: "объективный" },
-        { hebrew: "סובייקטיבי", russian: "субъективный" }
+        { hebrew: "סובייקטיבי", russian: "субъективный" },
     ],
     20: [
         { hebrew: "ביקורתי", russian: "критический" },
@@ -439,7 +439,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "קפדני", russian: "строгий, педантичный" },
         { hebrew: "מיומן", russian: "умелый, квалифицированный" },
         { hebrew: "מנוסה", russian: "опытный" },
-        { hebrew: "מוכשר", russian: "талантливый, способный" }
+        { hebrew: "מוכשר", russian: "талантливый, способный" },
     ],
     21: [
         { hebrew: "בכיר", russian: "старший, высокопоставленный" },
@@ -461,7 +461,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "אלים", russian: "насильственный, жестокий" },
         { hebrew: "עוין", russian: "враждебный" },
         { hebrew: "חשדן", russian: "подозрительный, недоверчивый" },
-        { hebrew: "נאיבי", russian: "наивный" }
+        { hebrew: "נאיבי", russian: "наивный" },
     ],
     22: [
         { hebrew: "בוטה", russian: "резкий, грубый" },
@@ -483,7 +483,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "ליברלי", russian: "либеральный" },
         { hebrew: "דמוקרטי", russian: "демократический" },
         { hebrew: "שוויוני", russian: "равноправный, эгалитарный" },
-        { hebrew: "גזעני", russian: "расистский" }
+        { hebrew: "גזעני", russian: "расистский" },
     ],
     23: [
         { hebrew: "חוקתי", russian: "конституционный" },
@@ -505,7 +505,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "מיושן", russian: "устаревший" },
         { hebrew: "מתמשך", russian: "продолжающийся, длительный" },
         { hebrew: "מאוחד", russian: "объединённый" },
-        { hebrew: "בלתי־אפשרי", russian: "невозможный" }
+        { hebrew: "בלתי־אפשרי", russian: "невозможный" },
     ],
     24: [
         { hebrew: "בלתי־מוגבל", russian: "неограниченный" },
@@ -527,7 +527,7 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "בזבזני", russian: "расточительный" },
         { hebrew: "אופייני", russian: "характерный, типичный" },
         { hebrew: "שקרן", russian: "лживый; лжец" },
-        { hebrew: "רוחני", russian: "духовный" }
+        { hebrew: "רוחני", russian: "духовный" },
     ],
     25: [
         { hebrew: "חומרי", russian: "материальный" },
@@ -549,6 +549,6 @@ export const adjectivesData: Record<number, CardData[]> = {
         { hebrew: "דו־צדדי", russian: "двусторонний" },
         { hebrew: "חד־פעמי", russian: "одноразовый; однократный" },
         { hebrew: "רב־פעמי", russian: "многоразовый" },
-        { hebrew: "רב־לאומי", russian: "многонациональный" }
-    ]
+        { hebrew: "רב־לאומי", russian: "многонациональный" },
+    ],
 };

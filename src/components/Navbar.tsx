@@ -1,162 +1,81 @@
-import {
-    useEffect,
-    useState,
-} from "react";
-
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import type { Category } from "../types";
-
-import { isLevelUnlocked } from "../utils/progress";
+import { CATEGORY_CONFIG, CATEGORIES } from "../config/categories";
 import { useGrammar } from "../context/GrammarContext";
-
-
-type MenuCategory = {
-    title: string;
-    category: Category;
-    levels: number;
-};
-
+import type { Category } from "../types";
+import { isLevelUnlocked } from "../utils/progress";
 
 function Navbar() {
     const [, setUpdate] = useState(0);
-
-    const [openCategory, setOpenCategory] =
-        useState<Category | null>(null);
+    const [openCategory, setOpenCategory] = useState<Category | null>(null);
 
     const { count } = useGrammar();
 
-
     useEffect(() => {
         const handleLevelsUpdated = () => {
-            setUpdate((prev) => prev + 1);
+            setUpdate((previous) => previous + 1);
         };
 
-        window.addEventListener(
-            "levelsUpdated",
-            handleLevelsUpdated,
-        );
+        window.addEventListener("levelsUpdated", handleLevelsUpdated);
 
         return () => {
-            window.removeEventListener(
-                "levelsUpdated",
-                handleLevelsUpdated,
-            );
+            window.removeEventListener("levelsUpdated", handleLevelsUpdated);
         };
     }, []);
-
-
-    const categories: MenuCategory[] = [
-        {
-            title: "Глаголы",
-            category: "verbs",
-            levels: 25,
-        },
-        {
-            title: "Прилагательные",
-            category: "adjectives",
-            levels: 25,
-        },
-        {
-            title: "Наречия",
-            category: "adverbs",
-            levels: 15,
-        },
-    ];
-
 
     const closeMenu = () => {
         setOpenCategory(null);
     };
 
-
     return (
         <nav className="navbar">
             <ul className="nav-list">
                 <li>
-                    <NavLink
-                        to="/"
-                        className="nav-link"
-                        onClick={closeMenu}
-                    >
+                    <NavLink to="/" className="nav-link" onClick={closeMenu}>
                         Главная
                     </NavLink>
                 </li>
 
-                {categories.map(
-                    (category) => (
-                        <li
-                            className="dropdown"
-                            key={category.category}
-                            onMouseLeave={closeMenu}
-                        >
+                {CATEGORIES.map((category) => {
+                    const config = CATEGORY_CONFIG[category];
+
+                    return (
+                        <li className="dropdown" key={category} onMouseLeave={closeMenu}>
                             <button
                                 type="button"
                                 className="dropdown-toggle"
                                 onClick={() =>
-                                    setOpenCategory(
-                                        openCategory ===
-                                        category.category
-                                            ? null
-                                            : category.category,
-                                    )
+                                    setOpenCategory(openCategory === category ? null : category)
                                 }
                             >
-                                {category.title} ▾
+                                {config.title} ▾
                             </button>
 
                             <ul
                                 className={
-                                    openCategory ===
-                                    category.category
+                                    openCategory === category
                                         ? "styled-dropdown dropdown-menu open"
                                         : "styled-dropdown dropdown-menu"
                                 }
                             >
-                                {Array.from(
-                                    {
-                                        length:
-                                        category.levels,
-                                    },
-                                    (
-                                        _,
-                                        index,
-                                    ) =>
-                                        index + 1,
-                                ).map(
+                                {Array.from({ length: config.levels }, (_, index) => index + 1).map(
                                     (level) => {
-                                        const unlocked =
-                                            isLevelUnlocked(
-                                                category.category,
-                                                level,
-                                            );
+                                        const unlocked = isLevelUnlocked(category, level);
 
                                         return (
-                                            <li
-                                                key={
-                                                    level
-                                                }
-                                            >
+                                            <li key={level}>
                                                 {unlocked ? (
                                                     <NavLink
-                                                        to={`/${category.category}/${level}`}
+                                                        to={`/${category}/${level}`}
                                                         className="level-link"
-                                                        onClick={
-                                                            closeMenu
-                                                        }
+                                                        onClick={closeMenu}
                                                     >
-                                                        Уровень{" "}
-                                                        {
-                                                            level
-                                                        }
+                                                        Уровень {level}
                                                     </NavLink>
                                                 ) : (
                                                     <span className="locked-link">
-                                                        🔒
-                                                        Уровень{" "}
-                                                        {
-                                                            level
-                                                        }
+                                                        🔒 Уровень {level}
                                                     </span>
                                                 )}
                                             </li>
@@ -165,8 +84,8 @@ function Navbar() {
                                 )}
                             </ul>
                         </li>
-                    ),
-                )}
+                    );
+                })}
 
                 <li>
                     <NavLink
@@ -174,22 +93,14 @@ function Navbar() {
                         className="nav-link grammar-nav-link"
                         onClick={closeMenu}
                     >
-                        <span>
-                            Грамматика
-                        </span>
+                        <span>Грамматика</span>
 
-                        <span className="grammar-counter">
-                            {count}
-                        </span>
+                        <span className="grammar-counter">{count}</span>
                     </NavLink>
                 </li>
 
                 <li>
-                    <NavLink
-                        to="/statistics"
-                        className="nav-link"
-                        onClick={closeMenu}
-                    >
+                    <NavLink to="/statistics" className="nav-link" onClick={closeMenu}>
                         Статистика
                     </NavLink>
                 </li>
@@ -197,6 +108,5 @@ function Navbar() {
         </nav>
     );
 }
-
 
 export default Navbar;

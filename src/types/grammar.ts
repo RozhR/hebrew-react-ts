@@ -1,18 +1,13 @@
-export type GrammarCategory =
-    | "verbs"
-    | "adjectives"
-    | "adverbs";
-
+import type { Category } from "../types";
 
 export interface GrammarWordRef {
-    category: GrammarCategory;
+    category: Category;
     id: number;
 }
 
-
-// ============================
-// VERBS
-// ============================
+/* =========================================================
+   VERBS
+   ========================================================= */
 
 export interface VerbBase {
     id: number;
@@ -21,7 +16,6 @@ export interface VerbBase {
     government: string;
     level: number;
 }
-
 
 export interface VerbPresent {
     id: number;
@@ -33,7 +27,6 @@ export interface VerbPresent {
     masculine_plural: string;
     feminine_plural: string;
 }
-
 
 export interface VerbPast {
     id: number;
@@ -54,7 +47,6 @@ export interface VerbPast {
 
     third_person_plural: string;
 }
-
 
 export interface VerbFutureImperative {
     id: number;
@@ -95,7 +87,6 @@ export interface VerbExamples {
     future_translation: string;
 }
 
-
 export interface VerbGrammar {
     base: VerbBase;
     present: VerbPresent;
@@ -104,10 +95,9 @@ export interface VerbGrammar {
     examples: VerbExamples;
 }
 
-
-// ============================
-// ADJECTIVES
-// ============================
+/* =========================================================
+   ADJECTIVES
+   ========================================================= */
 
 export interface AdjectiveBase {
     id: number;
@@ -121,14 +111,12 @@ export interface AdjectiveBase {
     level: number;
 }
 
-
 export interface AdjectiveConstruction {
     id: number;
     adjective: string;
     construction: string;
     meaning: string;
 }
-
 
 export interface AdjectiveExamples {
     id: number;
@@ -145,20 +133,15 @@ export interface AdjectiveExamples {
     translation3: string;
 }
 
-
 export interface AdjectiveGrammar {
     base: AdjectiveBase;
-
-    // Не у каждого прилагательного есть конструкция.
     construction?: AdjectiveConstruction;
-
     examples: AdjectiveExamples;
 }
 
-
-// ============================
-// ADVERBS
-// ============================
+/* =========================================================
+   ADVERBS
+   ========================================================= */
 
 export interface AdverbBase {
     id: number;
@@ -167,7 +150,6 @@ export interface AdverbBase {
     category: string;
     level: number;
 }
-
 
 export interface AdverbUsage {
     id: number;
@@ -179,7 +161,6 @@ export interface AdverbUsage {
     usage: string;
 }
 
-
 export interface AdverbRelation {
     id: number;
     adverb: string;
@@ -189,7 +170,6 @@ export interface AdverbRelation {
     related_expression: string;
     comment: string;
 }
-
 
 export interface AdverbExamples {
     id: number;
@@ -206,13 +186,9 @@ export interface AdverbExamples {
     translation3: string;
 }
 
-
 export interface AdverbGrammar {
     base: AdverbBase;
     usage: AdverbUsage;
-
-    // Relations есть не для всех 300 слов.
     relation?: AdverbRelation;
-
     examples: AdverbExamples;
 }

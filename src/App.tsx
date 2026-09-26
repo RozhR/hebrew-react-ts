@@ -1,31 +1,15 @@
-import {
-    lazy,
-    Suspense,
-} from "react";
+import { lazy, Suspense } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 
-import {
-    Navigate,
-    Route,
-    Routes,
-} from "react-router-dom";
+import Home from "./components/Home";
+import LearningPage from "./components/LearningPage";
+import Navbar from "./components/Navbar";
+import Statistics from "./components/Statistics";
 
 import "./App.css";
 
-import Navbar from "./components/Navbar";
-import Home from "./components/Home";
-import Statistics from "./components/Statistics";
-import LearningPage from "./components/LearningPage";
-
-
-const Grammar = lazy(
-    () => import("./components/Grammar"),
-);
-
-
-const GrammarTest = lazy(
-    () => import("./components/GrammarTest"),
-);
-
+const Grammar = lazy(() => import("./components/Grammar"));
+const GrammarTest = lazy(() => import("./components/GrammarTest"));
 
 function App() {
     return (
@@ -33,25 +17,15 @@ function App() {
             <Navbar />
 
             <Routes>
-                <Route
-                    path="/"
-                    element={<Home />}
-                />
+                <Route path="/" element={<Home />} />
 
-                <Route
-                    path="/statistics"
-                    element={<Statistics />}
-                />
+                <Route path="/statistics" element={<Statistics />} />
 
                 <Route
                     path="/grammar"
                     element={
                         <Suspense
-                            fallback={
-                                <div className="grammar-loading">
-                                    Загрузка грамматики...
-                                </div>
-                            }
+                            fallback={<div className="grammar-loading">Загрузка грамматики...</div>}
                         >
                             <Grammar />
                         </Suspense>
@@ -62,42 +36,21 @@ function App() {
                     path="/grammar/test"
                     element={
                         <Suspense
-                            fallback={
-                                <div className="grammar-loading">
-                                    Загрузка теста...
-                                </div>
-                            }
+                            fallback={<div className="grammar-loading">Загрузка теста...</div>}
                         >
                             <GrammarTest />
                         </Suspense>
                     }
                 />
 
-                <Route
-                    path="/:category/:level"
-                    element={<LearningPage />}
-                />
+                <Route path="/:category/:level" element={<LearningPage />} />
 
-                <Route
-                    path="/:category/:level/test"
-                    element={
-                        <LearningPage testMode />
-                    }
-                />
+                <Route path="/:category/:level/test" element={<LearningPage testMode />} />
 
-                <Route
-                    path="*"
-                    element={
-                        <Navigate
-                            to="/"
-                            replace
-                        />
-                    }
-                />
+                <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
         </>
     );
 }
-
 
 export default App;

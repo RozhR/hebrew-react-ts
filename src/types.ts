@@ -1,30 +1,19 @@
-export type Category =
-    | "verbs"
-    | "adjectives"
-    | "adverbs";
+export type Category = "verbs" | "adjectives" | "adverbs";
 
-
-export type CardData = {
+export interface CardData {
     hebrew: string;
     russian: string;
-};
+}
 
-
-export type CardWithId = CardData & {
+export interface CardWithId extends CardData {
     id: number;
-};
+}
 
-
-export type TestAttempt = {
+export interface TestAttempt {
     percent: number;
     correct: number;
     total: number;
     date: string;
-};
+}
 
-
-export type TestStats = {
-    [category in Category]?: {
-        [level: number]: TestAttempt[];
-    };
-};
+export type TestStats = Partial<Record<Category, Record<number, TestAttempt[]>>>;

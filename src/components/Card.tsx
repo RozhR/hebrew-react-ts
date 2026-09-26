@@ -9,70 +9,42 @@ import {
 
 import { useGrammar } from "../context/GrammarContext";
 
-import type {
-    CardWithId,
-    Category,
-} from "../types";
-
+import type { CardWithId, Category } from "../types";
 
 type CardProps = {
     card: CardWithId;
     category: Category;
 };
 
-
 const LONG_PRESS_DELAY = 700;
 const MOVE_TOLERANCE = 15;
 
+function Card({ card, category }: CardProps) {
+    const [isFlipped, setIsFlipped] = useState(false);
 
-function Card({
-                  card,
-                  category,
-              }: CardProps) {
-    const [isFlipped, setIsFlipped] =
-        useState(false);
+    const [isPressing, setIsPressing] = useState(false);
 
-    const [isPressing, setIsPressing] =
-        useState(false);
+    const [isTouchDevice, setIsTouchDevice] = useState(false);
 
-    const [isTouchDevice, setIsTouchDevice] =
-        useState(false);
+    const { addWord, removeWord, isInGrammar } = useGrammar();
 
+    const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-    const {
-        addWord,
-        removeWord,
-        isInGrammar,
-    } = useGrammar();
+    const longPressTriggered = useRef(false);
 
+    const startPosition = useRef({
+        x: 0,
+        y: 0,
+    });
 
-    const longPressTimer =
-        useRef<ReturnType<
-            typeof setTimeout
-        > | null>(null);
-
-    const longPressTriggered =
-        useRef(false);
-
-    const startPosition =
-        useRef({
-            x: 0,
-            y: 0,
-        });
-
-    const pressedInGrammar =
-        useRef(false);
-
+    const pressedInGrammar = useRef(false);
 
     const grammarWord = {
         category,
         id: card.id,
     };
 
-
-    const inGrammar =
-        isInGrammar(grammarWord);
-
+    const inGrammar = isInGrammar(grammarWord);
 
     /*
      * Определяем touch-устройство.
@@ -80,53 +52,36 @@ function Card({
     useEffect(() => {
         const checkTouchDevice = () => {
             setIsTouchDevice(
-                navigator.maxTouchPoints > 0 ||
-                window.matchMedia(
-                    "(pointer: coarse)",
-                ).matches,
+                navigator.maxTouchPoints > 0 || window.matchMedia("(pointer: coarse)").matches,
             );
         };
 
         checkTouchDevice();
 
-        window.addEventListener(
-            "resize",
-            checkTouchDevice,
-        );
+        window.addEventListener("resize", checkTouchDevice);
 
         return () => {
-            window.removeEventListener(
-                "resize",
-                checkTouchDevice,
-            );
+            window.removeEventListener("resize", checkTouchDevice);
         };
     }, []);
 
-
     const clearLongPress = () => {
         if (longPressTimer.current) {
-            clearTimeout(
-                longPressTimer.current,
-            );
+            clearTimeout(longPressTimer.current);
 
-            longPressTimer.current =
-                null;
+            longPressTimer.current = null;
         }
 
         setIsPressing(false);
     };
 
-
     useEffect(() => {
         return () => {
             if (longPressTimer.current) {
-                clearTimeout(
-                    longPressTimer.current,
-                );
+                clearTimeout(longPressTimer.current);
             }
         };
     }, []);
-
 
     /*
      * Обычный короткий клик / tap:
@@ -138,48 +93,35 @@ function Card({
          * может создать дополнительный click.
          */
         if (longPressTriggered.current) {
-            longPressTriggered.current =
-                false;
+            longPressTriggered.current = false;
 
             return;
         }
 
-        setIsFlipped(
-            (current) => !current,
-        );
+        setIsFlipped((current) => !current);
     };
-
 
     /*
      * DESKTOP:
      * обычный drag-and-drop.
      */
-    const handleDragStart = (
-        event: DragEvent<HTMLDivElement>,
-    ) => {
+    const handleDragStart = (event: DragEvent<HTMLDivElement>) => {
         if (isTouchDevice) {
             event.preventDefault();
 
             return;
         }
 
-        event.dataTransfer.effectAllowed =
-            "copy";
+        event.dataTransfer.effectAllowed = "copy";
 
-        event.dataTransfer.setData(
-            "application/json",
-            JSON.stringify(grammarWord),
-        );
+        event.dataTransfer.setData("application/json", JSON.stringify(grammarWord));
     };
-
 
     /*
      * MOBILE:
      * начало удержания.
      */
-    const handleTouchStart = (
-        event: TouchEvent<HTMLDivElement>,
-    ) => {
+    const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
         /*
          * Нас интересует только
          * одно касание.
@@ -188,88 +130,63 @@ function Card({
             return;
         }
 
-        const touch =
-            event.touches[0];
+        const touch = event.touches[0];
 
         if (!touch) {
             return;
         }
 
+        longPressTriggered.current = false;
 
-        longPressTriggered.current =
-            false;
-
-        pressedInGrammar.current =
-            inGrammar;
-
+        pressedInGrammar.current = inGrammar;
 
         startPosition.current = {
             x: touch.clientX,
             y: touch.clientY,
         };
 
-
         setIsPressing(true);
 
+        longPressTimer.current = window.setTimeout(() => {
+            longPressTriggered.current = true;
 
-        longPressTimer.current =
-            window.setTimeout(() => {
-                longPressTriggered.current =
-                    true;
+            setIsPressing(false);
 
-                setIsPressing(false);
+            /*
+             * Если слово уже выбрано —
+             * удаляем.
+             *
+             * Иначе добавляем.
+             */
+            if (pressedInGrammar.current) {
+                removeWord(grammarWord);
+            } else {
+                addWord(grammarWord);
+            }
 
+            /*
+             * Короткая вибрация,
+             * если телефон поддерживает.
+             */
+            if ("vibrate" in navigator) {
+                navigator.vibrate(30);
+            }
 
-                /*
-                 * Если слово уже выбрано —
-                 * удаляем.
-                 *
-                 * Иначе добавляем.
-                 */
-                if (
-                    pressedInGrammar.current
-                ) {
-                    removeWord(
-                        grammarWord,
-                    );
-                } else {
-                    addWord(
-                        grammarWord,
-                    );
-                }
-
-
-                /*
-                 * Короткая вибрация,
-                 * если телефон поддерживает.
-                 */
-                if (
-                    "vibrate" in navigator
-                ) {
-                    navigator.vibrate(30);
-                }
-
-
-                longPressTimer.current =
-                    null;
-            }, LONG_PRESS_DELAY);
+            longPressTimer.current = null;
+        }, LONG_PRESS_DELAY);
     };
-
 
     /*
      * Если пользователь начал
      * прокручивать страницу —
      * отменяем long press.
      */
-    const handleTouchMove = (
-        event: TouchEvent<HTMLDivElement>,
-    ) => {
+    const handleTouchMove = (event: TouchEvent<HTMLDivElement>) => {
         if (!longPressTimer.current) {
             return;
         }
 
-        const touch =
-            event.touches[0];
+        const touch = event.touches[0];
 
         if (!touch) {
             clearLongPress();
@@ -277,26 +194,14 @@ function Card({
             return;
         }
 
+        const deltaX = Math.abs(touch.clientX - startPosition.current.x);
 
-        const deltaX = Math.abs(
-            touch.clientX -
-            startPosition.current.x,
-        );
+        const deltaY = Math.abs(touch.clientY - startPosition.current.y);
 
-        const deltaY = Math.abs(
-            touch.clientY -
-            startPosition.current.y,
-        );
-
-
-        if (
-            deltaX > MOVE_TOLERANCE ||
-            deltaY > MOVE_TOLERANCE
-        ) {
+        if (deltaX > MOVE_TOLERANCE || deltaY > MOVE_TOLERANCE) {
             clearLongPress();
         }
     };
-
 
     /*
      * Палец отпущен раньше 700ms —
@@ -306,84 +211,50 @@ function Card({
         clearLongPress();
     };
 
-
     const handleTouchCancel = () => {
         clearLongPress();
     };
 
-
     /*
      * Удаление через ✓.
      */
-    const handleRemoveFromGrammar = (
-        event: MouseEvent<HTMLButtonElement>,
-    ) => {
+    const handleRemoveFromGrammar = (event: MouseEvent<HTMLButtonElement>) => {
         event.stopPropagation();
 
         removeWord(grammarWord);
     };
 
-
     /*
      * Не даём нажатию на ✓
      * запустить long press карточки.
      */
-    const handleIndicatorTouchStart = (
-        event: TouchEvent<HTMLButtonElement>,
-    ) => {
+    const handleIndicatorTouchStart = (event: TouchEvent<HTMLButtonElement>) => {
         event.stopPropagation();
     };
-
 
     return (
         <div
             className={`
                 card
-                ${
-                isFlipped
-                    ? "flipped"
-                    : ""
-            }
-                ${
-                isPressing
-                    ? "long-press-active"
-                    : ""
-            }
-                ${
-                inGrammar
-                    ? "in-grammar"
-                    : ""
-            }
+                ${isFlipped ? "flipped" : ""}
+                ${isPressing ? "long-press-active" : ""}
+                ${inGrammar ? "in-grammar" : ""}
             `}
             onClick={handleClick}
 
             draggable={!isTouchDevice}
 
-            onDragStart={
-                handleDragStart
-            }
+            onDragStart={handleDragStart}
 
-            onTouchStart={
-                handleTouchStart
-            }
+            onTouchStart={handleTouchStart}
 
-            onTouchMove={
-                handleTouchMove
-            }
+            onTouchMove={handleTouchMove}
 
-            onTouchEnd={
-                handleTouchEnd
-            }
+            onTouchEnd={handleTouchEnd}
 
-            onTouchCancel={
-                handleTouchCancel
-            }
+            onTouchCancel={handleTouchCancel}
 
-            onContextMenu={(
-                event,
-            ) =>
-                event.preventDefault()
-            }
+            onContextMenu={(event) => event.preventDefault()}
 
             data-category={category}
             data-id={card.id}
@@ -400,36 +271,23 @@ function Card({
 
                     draggable={false}
 
-                    onTouchStart={
-                        handleIndicatorTouchStart
-                    }
+                    onTouchStart={handleIndicatorTouchStart}
 
-                    onClick={
-                        handleRemoveFromGrammar
-                    }
+                    onClick={handleRemoveFromGrammar}
                 >
-                    <span className="grammar-indicator-check">
-                        ✓
-                    </span>
+                    <span className="grammar-indicator-check">✓</span>
 
-                    <span className="grammar-indicator-remove">
-                        ×
-                    </span>
+                    <span className="grammar-indicator-remove">×</span>
                 </button>
             )}
 
             <div className="card-inner">
-                <div className="card-front">
-                    {card.hebrew}
-                </div>
+                <div className="card-front">{card.hebrew}</div>
 
-                <div className="card-back">
-                    {card.russian}
-                </div>
+                <div className="card-back">{card.russian}</div>
             </div>
         </div>
     );
 }
-
 
 export default Card;

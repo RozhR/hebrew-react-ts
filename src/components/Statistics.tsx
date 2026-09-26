@@ -1,25 +1,15 @@
 import { useState } from "react";
 
-import type {
-    Category,
-    TestStats,
-} from "../types";
+import { CATEGORY_CONFIG, CATEGORIES } from "../config/categories";
 
-const categoryTitles: Record<Category, string> = {
-    verbs: "Глаголы",
-    adjectives: "Прилагательные",
-    adverbs: "Наречия",
-};
+import type { TestStats } from "../types";
 
 function Statistics() {
     const [stats, setStats] = useState<TestStats>(() => {
         try {
-            const savedStats =
-                localStorage.getItem("testStats");
+            const savedStats = localStorage.getItem("testStats");
 
-            return savedStats
-                ? JSON.parse(savedStats)
-                : {};
+            return savedStats ? JSON.parse(savedStats) : {};
         } catch {
             return {};
         }
@@ -29,168 +19,91 @@ function Statistics() {
         localStorage.removeItem("testStats");
         setStats({});
 
-        window.dispatchEvent(
-            new Event("levelsUpdated"),
-        );
+        window.dispatchEvent(new Event("levelsUpdated"));
     };
 
-    const categories: Category[] = [
-        "verbs",
-        "adjectives",
-        "adverbs",
-    ];
-
-    const hasStatistics = categories.some(
-        (category) =>
-            Object.keys(stats[category] ?? {}).length > 0,
+    const hasStatistics = CATEGORIES.some(
+        (category) => Object.keys(stats[category] ?? {}).length > 0,
     );
 
     return (
         <div className="statistics-page">
-            <h2 className="statistics-title">
-                Статистика
-            </h2>
+            <h2 className="statistics-title">Статистика</h2>
 
             {!hasStatistics ? (
                 <p className="statistics-empty">
-                    Статистика пока отсутствует.
-                    Пройдите хотя бы один тест.
+                    Статистика пока отсутствует. Пройдите хотя бы один тест.
                 </p>
             ) : (
                 <div className="statistics-container">
-                    {categories.map((category) => {
-                        const categoryStats =
-                            stats[category];
+                    {CATEGORIES.map((category) => {
+                        const categoryStats = stats[category];
 
-                        const levels = Object.entries(
-                            categoryStats ?? {},
-                        ).sort(
-                            ([levelA], [levelB]) =>
-                                Number(levelA) -
-                                Number(levelB),
+                        const levels = Object.entries(categoryStats ?? {}).sort(
+                            ([levelA], [levelB]) => Number(levelA) - Number(levelB),
                         );
 
                         return (
-                            <section
-                                className="statistics-category"
-                                key={category}
-                            >
-                                <h3>
-                                    {
-                                        categoryTitles[
-                                            category
-                                            ]
-                                    }
-                                </h3>
+                            <section className="statistics-category" key={category}>
+                                <h3>{CATEGORY_CONFIG[category].title}</h3>
 
                                 {levels.length === 0 ? (
-                                    <p className="statistics-no-results">
-                                        Нет результатов
-                                    </p>
+                                    <p className="statistics-no-results">Нет результатов</p>
                                 ) : (
-                                    levels.map(
-                                        ([
-                                             level,
-                                             attempts,
-                                         ]) => {
-                                            const bestAttempt =
-                                                attempts.reduce(
-                                                    (
-                                                        best,
-                                                        current,
-                                                    ) =>
-                                                        current.percent >
-                                                        best.percent
-                                                            ? current
-                                                            : best,
-                                                );
-                                            const averagePercent =
-                                                Math.round(
-                                                    attempts.reduce(
-                                                        (sum, attempt) =>
-                                                            sum + attempt.percent,
-                                                        0,
-                                                    ) /
-                                                    attempts.length,
-                                                );
+                                    levels.map(([level, attempts]) => {
+                                        const bestAttempt = attempts.reduce((best, current) =>
+                                            current.percent > best.percent ? current : best,
+                                        );
 
-                                            const progressClass =
-                                                bestAttempt.percent >=
-                                                80
-                                                    ? "progress-good"
-                                                    : bestAttempt.percent >=
-                                                    50
-                                                        ? "progress-medium"
-                                                        : "progress-low";
+                                        const averagePercent = Math.round(
+                                            attempts.reduce(
+                                                (sum, attempt) => sum + attempt.percent,
+                                                0,
+                                            ) / attempts.length,
+                                        );
 
-                                            return (
-                                                <div
-                                                    className="statistics-level"
-                                                    key={
-                                                        level
-                                                    }
-                                                >
-                                                    <div className="statistics-level-header">
-                                                        <strong>
-                                                            Уровень{" "}
-                                                            {
-                                                                level
-                                                            }
-                                                        </strong>
+                                        const progressClass =
+                                            bestAttempt.percent >= 80
+                                                ? "progress-good"
+                                                : bestAttempt.percent >= 50
+                                                  ? "progress-medium"
+                                                  : "progress-low";
 
-                                                        <span>
-                                                            {
-                                                                bestAttempt.percent
-                                                            }
-                                                            %
-                                                        </span>
-                                                    </div>
+                                        return (
+                                            <div className="statistics-level" key={level}>
+                                                <div className="statistics-level-header">
+                                                    <strong>Уровень {level}</strong>
 
-                                                    <div className="statistics-progress">
-                                                        <div
-                                                            className={`statistics-progress-fill ${progressClass}`}
-                                                            style={{
-                                                                width: `${bestAttempt.percent}%`,
-                                                            }}
-                                                        />
-                                                    </div>
-
-                                                    <p>
-                                                        Правильных
-                                                        ответов:{" "}
-                                                        {
-                                                            bestAttempt.correct
-                                                        }{" "}
-                                                        из{" "}
-                                                        {
-                                                            bestAttempt.total
-                                                        }
-                                                    </p>
-
-                                                    <p className="statistics-date">
-                                                        Лучшая
-                                                        попытка:{" "}
-                                                        {new Date(
-                                                            bestAttempt.date,
-                                                        ).toLocaleString()}
-                                                    </p>
-
-                                                    <p className="statistics-attempts">
-                                                        Попыток:{" "}
-                                                        {
-                                                            attempts.length
-                                                        }
-                                                        {" · "}
-                                                        Средний балл:{" "}
-                                                        {
-                                                            averagePercent
-                                                        }
-                                                        %
-                                                    </p>
+                                                    <span>{bestAttempt.percent}%</span>
                                                 </div>
-                                            );
-                                        },
-                                    )
+
+                                                <div className="statistics-progress">
+                                                    <div
+                                                        className={`statistics-progress-fill ${progressClass}`}
+                                                        style={{
+                                                            width: `${bestAttempt.percent}%`,
+                                                        }}
+                                                    />
+                                                </div>
+
+                                                <p>
+                                                    Правильных ответов: {bestAttempt.correct} из{" "}
+                                                    {bestAttempt.total}
+                                                </p>
+
+                                                <p className="statistics-date">
+                                                    Лучшая попытка:{" "}
+                                                    {new Date(bestAttempt.date).toLocaleString()}
+                                                </p>
+
+                                                <p className="statistics-attempts">
+                                                    Попыток: {attempts.length}
+                                                    {" · "}
+                                                    Средний балл: {averagePercent}%
+                                                </p>
+                                            </div>
+                                        );
+                                    })
                                 )}
                             </section>
                         );

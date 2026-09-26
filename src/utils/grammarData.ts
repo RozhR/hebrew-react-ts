@@ -13,41 +13,26 @@ import adverbsUsage from "../data/grammar/adverbs/usage.json";
 import adverbsRelations from "../data/grammar/adverbs/relations.json";
 import adverbsExamples from "../data/grammar/adverbs/examples.json";
 
-import type {
-    AdjectiveGrammar,
-    AdverbGrammar,
-    GrammarCategory,
-    VerbGrammar,
-} from "../types/grammar";
+import type { Category } from "../types";
 
+import type { AdjectiveGrammar, AdverbGrammar, VerbGrammar } from "../types/grammar";
 
-function findById<T extends { id: number }>(
-    items: T[],
-    id: number,
-): T | undefined {
+function findById<T extends { id: number }>(items: T[], id: number): T | undefined {
     return items.find((item) => item.id === id);
 }
 
-
-export function getVerbGrammar(
-    id: number,
-): VerbGrammar | undefined {
+export function getVerbGrammar(id: number): VerbGrammar | undefined {
     const base = findById(verbsBase, id);
+
     const present = findById(verbsPresent, id);
+
     const past = findById(verbsPast, id);
-    const future = findById(
-        verbsFutureImperative,
-        id,
-    );
+
+    const future = findById(verbsFutureImperative, id);
+
     const examples = findById(verbsExamples, id);
 
-    if (
-        !base ||
-        !present ||
-        !past ||
-        !future ||
-        !examples
-    ) {
+    if (!base || !present || !past || !future || !examples) {
         return undefined;
     }
 
@@ -60,19 +45,12 @@ export function getVerbGrammar(
     };
 }
 
-
-export function getAdjectiveGrammar(
-    id: number,
-): AdjectiveGrammar | undefined {
+export function getAdjectiveGrammar(id: number): AdjectiveGrammar | undefined {
     const base = findById(adjectivesBase, id);
-    const construction = findById(
-        adjectivesConstructions,
-        id,
-    );
-    const examples = findById(
-        adjectivesExamples,
-        id,
-    );
+
+    const construction = findById(adjectivesConstructions, id);
+
+    const examples = findById(adjectivesExamples, id);
 
     if (!base || !examples) {
         return undefined;
@@ -85,20 +63,14 @@ export function getAdjectiveGrammar(
     };
 }
 
-
-export function getAdverbGrammar(
-    id: number,
-): AdverbGrammar | undefined {
+export function getAdverbGrammar(id: number): AdverbGrammar | undefined {
     const base = findById(adverbsBase, id);
+
     const usage = findById(adverbsUsage, id);
-    const relation = findById(
-        adverbsRelations,
-        id,
-    );
-    const examples = findById(
-        adverbsExamples,
-        id,
-    );
+
+    const relation = findById(adverbsRelations, id);
+
+    const examples = findById(adverbsExamples, id);
 
     if (!base || !usage || !examples) {
         return undefined;
@@ -112,11 +84,7 @@ export function getAdverbGrammar(
     };
 }
 
-
-export function getGrammarWord(
-    category: GrammarCategory,
-    id: number,
-) {
+export function getGrammarWord(category: Category, id: number) {
     switch (category) {
         case "verbs":
             return getVerbGrammar(id);
@@ -126,8 +94,5 @@ export function getGrammarWord(
 
         case "adverbs":
             return getAdverbGrammar(id);
-
-        default:
-            return undefined;
     }
 }

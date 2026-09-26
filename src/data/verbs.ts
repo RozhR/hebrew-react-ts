@@ -21,7 +21,7 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "לכתוב", russian: "писать" },
         { hebrew: "לשמוע", russian: "слышать, слушать" },
         { hebrew: "לאכול", russian: "есть, кушать" },
-        { hebrew: "לשאול", russian: "спрашивать" }
+        { hebrew: "לשאול", russian: "спрашивать" },
     ],
     2: [
         { hebrew: "להגיע", russian: "прибывать, добираться" },
@@ -43,7 +43,7 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "להרגיש", russian: "чувствовать" },
         { hebrew: "לאהוב", russian: "любить" },
         { hebrew: "לשבת", russian: "сидеть" },
-        { hebrew: "לעמוד", russian: "стоять" }
+        { hebrew: "לעמוד", russian: "стоять" },
     ],
     3: [
         { hebrew: "לנסות", russian: "пробовать, пытаться" },
@@ -65,29 +65,29 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "להעלות", russian: "поднимать, повышать, загружать" },
         { hebrew: "להשתמש", russian: "использовать, пользоваться" },
         { hebrew: "לפגוש", russian: "встречать, встретить" },
-        { hebrew: "להיפגש", russian: "встречаться" }
+        { hebrew: "להיפגש", russian: "встречаться" },
     ],
     4: [
-        {hebrew: "לסיים", russian: "заканчивать"},
-        {hebrew: "לשחק", russian: "играть"},
-        {hebrew: "לישון", russian: "спать"},
-        {hebrew: "לקום", russian: "вставать"},
-        {hebrew: "לחיות", russian: "жить"},
-        {hebrew: "לנסוע", russian: "ехать"},
-        {hebrew: "לעצור", russian: "останавливать(ся)"},
-        {hebrew: "להכין", russian: "готовить, подготавливать"},
-        {hebrew: "לשתות", russian: "пить"},
-        {hebrew: "להזמין", russian: "приглашать, заказывать"},
-        {hebrew: "לבדוק", russian: "проверять"},
-        {hebrew: "להסביר", russian: "объяснять"},
-        {hebrew: "להאמין", russian: "верить"},
-        {hebrew: "לדאוג", russian: "беспокоиться; заботиться"},
-        {hebrew: "לטפל", russian: "заниматься, заботиться, лечить"},
-        {hebrew: "להתקשר", russian: "звонить, связываться"},
-        {hebrew: "להסתדר", russian: "справляться, ладить"},
-        {hebrew: "להצליח", russian: "преуспевать, удаваться"},
-        {hebrew: "להציע", russian: "предлагать"},
-        {hebrew: "להסכים", russian: "соглашаться"}
+        { hebrew: "לסיים", russian: "заканчивать" },
+        { hebrew: "לשחק", russian: "играть" },
+        { hebrew: "לישון", russian: "спать" },
+        { hebrew: "לקום", russian: "вставать" },
+        { hebrew: "לחיות", russian: "жить" },
+        { hebrew: "לנסוע", russian: "ехать" },
+        { hebrew: "לעצור", russian: "останавливать(ся)" },
+        { hebrew: "להכין", russian: "готовить, подготавливать" },
+        { hebrew: "לשתות", russian: "пить" },
+        { hebrew: "להזמין", russian: "приглашать, заказывать" },
+        { hebrew: "לבדוק", russian: "проверять" },
+        { hebrew: "להסביר", russian: "объяснять" },
+        { hebrew: "להאמין", russian: "верить" },
+        { hebrew: "לדאוג", russian: "беспокоиться; заботиться" },
+        { hebrew: "לטפל", russian: "заниматься, заботиться, лечить" },
+        { hebrew: "להתקשר", russian: "звонить, связываться" },
+        { hebrew: "להסתדר", russian: "справляться, ладить" },
+        { hebrew: "להצליח", russian: "преуспевать, удаваться" },
+        { hebrew: "להציע", russian: "предлагать" },
+        { hebrew: "להסכים", russian: "соглашаться" },
     ],
     5: [
         { hebrew: "להעדיף", russian: "предпочитать" },
@@ -109,7 +109,7 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "להודות", russian: "благодарить; признавать" },
         { hebrew: "להבטיח", russian: "обещать, гарантировать" },
         { hebrew: "לדרוש", russian: "требовать" },
-        { hebrew: "לאפשר", russian: "позволять, давать возможность" }
+        { hebrew: "לאפשר", russian: "позволять, давать возможность" },
     ],
     6: [
         { hebrew: "להרשות", russian: "разрешать, позволять" },
@@ -131,7 +131,7 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "למשוך", russian: "тянуть, привлекать" },
         { hebrew: "לדחוף", russian: "толкать" },
         { hebrew: "לחתוך", russian: "резать" },
-        { hebrew: "לשבור", russian: "ломать" }
+        { hebrew: "לשבור", russian: "ломать" },
     ],
     7: [
         { hebrew: "ליפול", russian: "падать" },
@@ -153,7 +153,7 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "לכעוס", russian: "сердиться, злиться" },
         { hebrew: "להירגע", russian: "успокаиваться" },
         { hebrew: "לשמוח", russian: "радоваться" },
-        { hebrew: "להתרגש", russian: "волноваться, быть взволнованным" }
+        { hebrew: "להתרגש", russian: "волноваться, быть взволнованным" },
     ],
     8: [
         { hebrew: "לשנוא", russian: "ненавидеть" },
@@ -175,7 +175,7 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "לשקר", russian: "лгать" },
         { hebrew: "להזהיר", russian: "предупреждать" },
         { hebrew: "לפרסם", russian: "публиковать, рекламировать" },
-        { hebrew: "לצלם", russian: "фотографировать, снимать" }
+        { hebrew: "לצלם", russian: "фотографировать, снимать" },
     ],
     9: [
         { hebrew: "למחוק", russian: "удалять, стирать" },
@@ -197,7 +197,7 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "לחשב", russian: "вычислять, рассчитывать" },
         { hebrew: "להעריך", russian: "оценивать, ценить" },
         { hebrew: "לחקור", russian: "исследовать, расследовать" },
-        { hebrew: "להוכיח", russian: "доказывать" }
+        { hebrew: "להוכיח", russian: "доказывать" },
     ],
     10: [
         { hebrew: "להניח", russian: "класть; предполагать" },
@@ -219,7 +219,7 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "לנוח", russian: "отдыхать" },
         { hebrew: "להתאמן", russian: "тренироваться" },
         { hebrew: "להתקלח", russian: "принимать душ" },
-        { hebrew: "להתלבש", russian: "одеваться" }
+        { hebrew: "להתלבש", russian: "одеваться" },
     ],
     11: [
         { hebrew: "ללבוש", russian: "надевать, носить одежду" },
@@ -241,7 +241,7 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "להשלים", russian: "завершать; мириться" },
         { hebrew: "לחבק", russian: "обнимать" },
         { hebrew: "לנשק", russian: "целовать" },
-        { hebrew: "לתמוך", russian: "поддерживать" }
+        { hebrew: "לתמוך", russian: "поддерживать" },
     ],
     12: [
         { hebrew: "לעודד", russian: "подбадривать, поощрять" },
@@ -263,7 +263,7 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "לערבב", russian: "смешивать, перемешивать" },
         { hebrew: "לחמם", russian: "нагревать, разогревать" },
         { hebrew: "לקרר", russian: "охлаждать" },
-        { hebrew: "לאפות", russian: "печь, выпекать" }
+        { hebrew: "לאפות", russian: "печь, выпекать" },
     ],
     13: [
         { hebrew: "לטגן", russian: "жарить" },
@@ -285,7 +285,7 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "לעצב", russian: "проектировать, оформлять" },
         { hebrew: "לתרגם", russian: "переводить" },
         { hebrew: "ללמד", russian: "преподавать, обучать" },
-        { hebrew: "לתרגל", russian: "практиковать, отрабатывать" }
+        { hebrew: "לתרגל", russian: "практиковать, отрабатывать" },
     ],
     14: [
         { hebrew: "לבחון", russian: "проверять, исследовать, экзаменовать" },
@@ -307,7 +307,7 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "לבצע", russian: "выполнять, осуществлять" },
         { hebrew: "להשיג", russian: "достигать, получать" },
         { hebrew: "לוותר", russian: "отказываться, уступать" },
-        { hebrew: "להתחייב", russian: "обязаться" }
+        { hebrew: "להתחייב", russian: "обязаться" },
     ],
     15: [
         { hebrew: "לקיים", russian: "выполнять, проводить, поддерживать" },
@@ -329,7 +329,7 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "להתקבל", russian: "быть принятым, поступать" },
         { hebrew: "לקדם", russian: "продвигать" },
         { hebrew: "להגיש", russian: "подавать, представлять" },
-        { hebrew: "לראיין", russian: "интервьюировать" }
+        { hebrew: "לראיין", russian: "интервьюировать" },
     ],
     16: [
         { hebrew: "להתפרנס", russian: "зарабатывать на жизнь" },
@@ -351,7 +351,7 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "ללמוד", russian: "учиться, изучать" },
         { hebrew: "להיכנס", russian: "входить, заходить" },
         { hebrew: "להסתכל", russian: "смотреть" },
-        { hebrew: "לחכות", russian: "ждать" }
+        { hebrew: "לחכות", russian: "ждать" },
     ],
     17: [
         { hebrew: "לזכור", russian: "помнить" },
@@ -373,7 +373,7 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "להתעורר", russian: "просыпаться" },
         { hebrew: "להפוך", russian: "переворачивать; превращать(ся)" },
         { hebrew: "להחזיק", russian: "держать, владеть" },
-        { hebrew: "להפסיד", russian: "проигрывать, терять" }
+        { hebrew: "להפסיד", russian: "проигрывать, терять" },
     ],
     18: [
         { hebrew: "לנצח", russian: "побеждать" },
@@ -395,7 +395,7 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "להתייחס", russian: "относиться, обращаться" },
         { hebrew: "להסתפק", russian: "довольствоваться, ограничиваться" },
         { hebrew: "להשוות", russian: "сравнивать" },
-        { hebrew: "להסתיים", russian: "заканчиваться" }
+        { hebrew: "להסתיים", russian: "заканчиваться" },
     ],
     19: [
         { hebrew: "להתנהג", russian: "вести себя" },
@@ -417,7 +417,7 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "לטעון", russian: "загружать; утверждать" },
         { hebrew: "להסיק", russian: "делать вывод" },
         { hebrew: "לשער", russian: "предполагать" },
-        { hebrew: "להעז", russian: "осмеливаться" }
+        { hebrew: "להעז", russian: "осмеливаться" },
     ],
     20: [
         { hebrew: "להסתכן", russian: "рисковать" },
@@ -439,7 +439,7 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "להתפשט", russian: "раздеваться; распространяться" },
         { hebrew: "להתעכב", russian: "задерживаться" },
         { hebrew: "להקדים", russian: "приходить раньше; опережать" },
-        { hebrew: "להתעמת", russian: "противостоять, вступать в конфронтацию" }
+        { hebrew: "להתעמת", russian: "противостоять, вступать в конфронтацию" },
     ],
     21: [
         { hebrew: "להתערב", russian: "вмешиваться" },
@@ -461,7 +461,7 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "לחשוף", russian: "раскрывать, обнажать" },
         { hebrew: "להיחשף", russian: "подвергаться воздействию, раскрываться" },
         { hebrew: "להתנשק", russian: "целоваться" },
-        { hebrew: "ללטף", russian: "гладить, ласкать" }
+        { hebrew: "ללטף", russian: "гладить, ласкать" },
     ],
     22: [
         { hebrew: "להציק", russian: "надоедать, приставать" },
@@ -483,7 +483,7 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "לקלף", russian: "чистить, снимать кожуру" },
         { hebrew: "לקצוץ", russian: "нарезать, рубить" },
         { hebrew: "לגהץ", russian: "гладить утюгом" },
-        { hebrew: "לפזר", russian: "разбрасывать, распределять" }
+        { hebrew: "לפזר", russian: "разбрасывать, распределять" },
     ],
     23: [
         { hebrew: "להעמיס", russian: "загружать, нагружать" },
@@ -505,7 +505,7 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "לנסח", russian: "формулировать" },
         { hebrew: "לפרש", russian: "объяснять, толковать" },
         { hebrew: "למיין", russian: "сортировать, классифицировать" },
-        { hebrew: "לסווג", russian: "классифицировать" }
+        { hebrew: "לסווג", russian: "классифицировать" },
     ],
     24: [
         { hebrew: "להפריד", russian: "разделять, отделять" },
@@ -527,7 +527,7 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "להתכתב", russian: "переписываться" },
         { hebrew: "לרכל", russian: "сплетничать" },
         { hebrew: "להתבדח", russian: "шутить" },
-        { hebrew: "להתיידד", russian: "подружиться" }
+        { hebrew: "להתיידד", russian: "подружиться" },
     ],
     25: [
         { hebrew: "להתארח", russian: "гостить" },
@@ -549,6 +549,6 @@ export const verbsData: Record<number, CardData[]> = {
         { hebrew: "להתחזק", russian: "становиться сильнее, укрепляться" },
         { hebrew: "להיחלש", russian: "слабеть" },
         { hebrew: "להשתקם", russian: "восстанавливаться, реабилитироваться" },
-        { hebrew: "להתמסר", russian: "посвящать себя, отдаваться делу" }
-    ]
+        { hebrew: "להתמסר", russian: "посвящать себя, отдаваться делу" },
+    ],
 };

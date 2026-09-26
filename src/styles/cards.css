@@ -1,0 +1,390 @@
+/* =========================================================
+   CARDS
+   ========================================================= */
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    gap: 20px;
+
+    margin-top: 30px;
+}
+
+.card {
+    position: relative;
+
+    width: 220px;
+    height: 160px;
+
+    perspective: 1000px;
+
+    cursor: grab;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+
+    touch-action: pan-y;
+
+    transition: all 0.4s ease;
+}
+
+.card:active {
+    cursor: grabbing;
+}
+
+.card:hover {
+    transform: translateY(-5px) scale(1.03);
+}
+
+.card-inner {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    transform-style: preserve-3d;
+
+    transition: transform 0.6s;
+}
+
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+
+    border-radius: 12px;
+
+    backface-visibility: hidden;
+
+    font-size: 28px;
+    text-align: center;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card-front {
+    background: linear-gradient(135deg, var(--color-bg-light), var(--color-bg));
+
+    color: var(--color-text-light);
+}
+
+.card-back {
+    background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
+
+    color: white;
+
+    transform: rotateY(180deg);
+}
+
+/* =========================================================
+   GRAMMAR CARD INDICATOR
+   ========================================================= */
+
+.grammar-card-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 30;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 29px;
+    height: 29px;
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+
+    background: var(--color-primary-light);
+    color: white;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.grammar-indicator-remove {
+    display: none;
+}
+
+.grammar-card-indicator:hover {
+    background: var(--color-error);
+
+    transform: scale(1.08);
+}
+
+.grammar-card-indicator:hover .grammar-indicator-check {
+    display: none;
+}
+
+.grammar-card-indicator:hover .grammar-indicator-remove {
+    display: inline;
+}
+
+.card.in-grammar .card-front {
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(159, 122, 234, 0.35);
+}
+
+/* =========================================================
+   LONG PRESS
+   ========================================================= */
+
+.card.long-press-active {
+    transform: translateY(-3px) scale(1.02);
+}
+
+.card.long-press-active::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    z-index: 25;
+
+    height: 4px;
+
+    border-radius: 4px;
+
+    background: var(--color-primary-light);
+
+    animation: grammar-long-press 700ms linear forwards;
+}
+
+@keyframes grammar-long-press {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+/* =========================================================
+   CARD PAGE CONTROLS
+   ========================================================= */
+
+.functions {
+    display: flex;
+    justify-content: center;
+
+    gap: 20px;
+
+    margin: 20px 0;
+}
+
+.level-title {
+    margin-top: 30px;
+
+    color: var(--color-primary-light);
+
+    font-size: 1.8rem;
+    text-align: center;
+
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.locked-level {
+    max-width: 600px;
+
+    margin: 40px auto 0;
+    padding: 30px;
+
+    border-radius: 12px;
+
+    background: var(--color-bg-dark);
+
+    text-align: center;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.locked-level p {
+    margin-top: 15px;
+
+    color: var(--color-text-muted);
+
+    font-size: 18px;
+}
+
+/* =========================================================
+   GRAMMAR DROP ZONE
+   ========================================================= */
+
+.grammar-drop-zone {
+    position: fixed;
+    top: 68px;
+    right: 25px;
+    z-index: 80;
+
+    width: 280px;
+    padding: 12px 16px;
+
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.05);
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+
+    transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.grammar-drop-title {
+    margin: 0 0 8px;
+
+    color: var(--color-primary-light);
+
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+.grammar-drop-inner {
+    padding: 9px 12px;
+
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.grammar-drop-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 6px;
+}
+
+.grammar-drop-header strong {
+    color: var(--color-text-light);
+}
+
+.grammar-drop-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 28px;
+    height: 28px;
+    padding: 0 8px;
+
+    border-radius: 14px;
+
+    background: var(--color-primary-light);
+    color: white;
+
+    font-weight: bold;
+}
+
+.grammar-drop-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 32px;
+    padding: 5px 8px;
+
+    border-radius: 8px;
+
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--color-text);
+
+    text-align: center;
+}
+
+.touch-grammar-hint {
+    display: none;
+}
+
+.grammar-drop-zone.drag-over {
+    background: rgba(159, 122, 234, 0.12);
+
+    transform: scale(1.04);
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.grammar-drop-zone.drag-over .grammar-drop-inner {
+    background: rgba(159, 122, 234, 0.15);
+}
+
+.grammar-added-text {
+    color: #68d391;
+
+    font-size: 1.05rem;
+    font-weight: bold;
+}
+
+/* =========================================================
+   TOUCH DEVICES
+   ========================================================= */
+
+@media (pointer: coarse) {
+    .desktop-grammar-hint {
+        display: none;
+    }
+
+    .touch-grammar-hint {
+        display: inline;
+    }
+
+    .grammar-card-indicator:hover {
+        background: var(--color-primary-light);
+
+        transform: none;
+    }
+
+    .grammar-card-indicator:hover .grammar-indicator-check {
+        display: inline;
+    }
+
+    .grammar-card-indicator:hover .grammar-indicator-remove {
+        display: none;
+    }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+    .grammar-drop-zone {
+        position: static;
+
+        width: min(350px, calc(100% - 30px));
+
+        margin: 20px auto;
+    }
+
+    .card-container {
+        padding-bottom: 30px;
+    }
+}

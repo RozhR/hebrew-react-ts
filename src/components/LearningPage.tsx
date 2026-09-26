@@ -1,8 +1,4 @@
-import {
-    Navigate,
-    useNavigate,
-    useParams,
-} from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 import CardList from "./CardList";
 import { Test } from "./Test";
@@ -15,13 +11,11 @@ import { isLevelUnlocked } from "../utils/progress";
 
 import type { Category } from "../types";
 
-
 const categoryTitles: Record<Category, string> = {
     verbs: "Глаголы",
     adjectives: "Прилагательные",
     adverbs: "Наречия",
 };
-
 
 const categoryLevels: Record<Category, number> = {
     verbs: 25,
@@ -29,22 +23,11 @@ const categoryLevels: Record<Category, number> = {
     adverbs: 15,
 };
 
-
-function isCategory(
-    value: string | undefined,
-): value is Category {
-    return (
-        value === "verbs" ||
-        value === "adjectives" ||
-        value === "adverbs"
-    );
+function isCategory(value: string | undefined): value is Category {
+    return value === "verbs" || value === "adjectives" || value === "adverbs";
 }
 
-
-function getCards(
-    category: Category,
-    level: number,
-) {
+function getCards(category: Category, level: number) {
     switch (category) {
         case "verbs":
             return verbsData[level] ?? [];
@@ -57,95 +40,45 @@ function getCards(
     }
 }
 
-
 type LearningPageProps = {
     testMode?: boolean;
 };
 
-
-function LearningPage({
-                          testMode = false,
-                      }: LearningPageProps) {
+function LearningPage({ testMode = false }: LearningPageProps) {
     const navigate = useNavigate();
 
-    const {
-        category: categoryParam,
-        level: levelParam,
-    } = useParams();
-
+    const { category: categoryParam, level: levelParam } = useParams();
 
     if (!isCategory(categoryParam)) {
-        return (
-            <Navigate
-                to="/verbs/1"
-                replace
-            />
-        );
+        return <Navigate to="/verbs/1" replace />;
     }
-
 
     const level = Number(levelParam);
 
-    const maxLevel =
-        categoryLevels[categoryParam];
+    const maxLevel = categoryLevels[categoryParam];
 
-
-    if (
-        !Number.isInteger(level) ||
-        level < 1 ||
-        level > maxLevel
-    ) {
-        return (
-            <Navigate
-                to={`/${categoryParam}/1`}
-                replace
-            />
-        );
+    if (!Number.isInteger(level) || level < 1 || level > maxLevel) {
+        return <Navigate to={`/${categoryParam}/1`} replace />;
     }
 
-
-    if (
-        !isLevelUnlocked(
-            categoryParam,
-            level,
-        )
-    ) {
-        return (
-            <Navigate
-                to={`/${categoryParam}/1`}
-                replace
-            />
-        );
+    if (!isLevelUnlocked(categoryParam, level)) {
+        return <Navigate to={`/${categoryParam}/1`} replace />;
     }
 
+    const cards = getCards(categoryParam, level);
 
-    const cards = getCards(
-        categoryParam,
-        level,
-    );
+    const cardsWithIds = cards.map((card, index) => ({
+        ...card,
 
+        id: (level - 1) * 20 + index + 1,
+    }));
 
-    const cardsWithIds = cards.map(
-        (card, index) => ({
-            ...card,
-
-            id:
-                (level - 1) * 20 +
-                index +
-                1,
-        }),
-    );
-
-
-    const categoryTitle =
-        categoryTitles[categoryParam];
-
+    const categoryTitle = categoryTitles[categoryParam];
 
     return (
         <>
             <h2 className="level-title">
-                {categoryTitle} — Уровень{" "}
-                {level}
+                {categoryTitle} — Уровень {level}
             </h2>
 
             {testMode ? (
@@ -154,30 +87,19 @@ function LearningPage({
                     words={cards}
                     category={categoryParam}
                     level={level}
-                    isLastLevel={
-                        level === maxLevel
-                    }
-                    onBackToCards={() =>
-                        navigate(
-                            `/${categoryParam}/${level}`,
-                        )
-                    }
+                    isLastLevel={level === maxLevel}
+                    onBackToCards={() => navigate(`/${categoryParam}/${level}`)}
                 />
             ) : (
                 <CardList
                     key={`${categoryParam}-${level}`}
                     cards={cardsWithIds}
                     category={categoryParam}
-                    onStartTest={() =>
-                        navigate(
-                            `/${categoryParam}/${level}/test`,
-                        )
-                    }
+                    onStartTest={() => navigate(`/${categoryParam}/${level}/test`)}
                 />
             )}
         </>
     );
 }
-
 
 export default LearningPage;

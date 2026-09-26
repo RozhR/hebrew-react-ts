@@ -1,15 +1,10 @@
 import { useEffect, useState } from "react";
 
-import type {
-    CardData,
-    Category,
-    TestAttempt,
-    TestStats,
-} from "../types";
+import { PASS_PERCENT, TEST_TIMER_SECONDS, TIMER_WARNING_SECONDS } from "../config/test";
 
-import {
-    unlockNextLevel,
-} from "../utils/progress";
+import type { CardData, Category, TestAttempt, TestStats } from "../types";
+
+import { unlockNextLevel } from "../utils/progress";
 
 interface TestProps {
     words: CardData[];
@@ -23,61 +18,35 @@ function shuffleArray<T>(array: T[]): T[] {
     const result = [...array];
 
     for (let i = result.length - 1; i > 0; i--) {
-        const j = Math.floor(
-            Math.random() * (i + 1),
-        );
+        const j = Math.floor(Math.random() * (i + 1));
 
-        [result[i], result[j]] = [
-            result[j],
-            result[i],
-        ];
+        [result[i], result[j]] = [result[j], result[i]];
     }
 
     return result;
 }
 
-function generateAnswers(
-    words: CardData[],
-    currentWord: CardData,
-): string[] {
+function generateAnswers(words: CardData[], currentWord: CardData): string[] {
     const wrongAnswers = Array.from(
         new Set(
             words
                 .filter(
                     (word) =>
-                        word.hebrew !==
-                        currentWord.hebrew &&
-                        word.russian !==
-                        currentWord.russian,
+                        word.hebrew !== currentWord.hebrew && word.russian !== currentWord.russian,
                 )
-                .map(
-                    (word) =>
-                        word.russian,
-                ),
+                .map((word) => word.russian),
         ),
     );
 
-    return shuffleArray([
-        currentWord.russian,
-        ...shuffleArray(
-            wrongAnswers,
-        ).slice(0, 3),
-    ]);
+    return shuffleArray([currentWord.russian, ...shuffleArray(wrongAnswers).slice(0, 3)]);
 }
 
-function saveStatistics(
-    category: Category,
-    level: number,
-    attempt: TestAttempt,
-): void {
-    const savedStats =
-        localStorage.getItem("testStats");
+function saveStatistics(category: Category, level: number, attempt: TestAttempt): void {
+    const savedStats = localStorage.getItem("testStats");
 
     const stats: TestStats = (() => {
         try {
-            return savedStats
-                ? JSON.parse(savedStats)
-                : {};
+            return savedStats ? JSON.parse(savedStats) : {};
         } catch {
             return {};
         }
@@ -88,77 +57,35 @@ function saveStatistics(
 
     stats[category]![level]!.push(attempt);
 
-    localStorage.setItem(
-        "testStats",
-        JSON.stringify(stats),
-    );
+    localStorage.setItem("testStats", JSON.stringify(stats));
 
-    window.dispatchEvent(
-        new Event("levelsUpdated"),
-    );
+    window.dispatchEvent(new Event("levelsUpdated"));
 }
 
-export function Test({
-                         words,
-                         category,
-                         level,
-                         isLastLevel,
-                         onBackToCards,
-                     }: TestProps) {
-    const [testWords, setTestWords] =
-        useState<CardData[]>(() =>
-            shuffleArray(words),
-        );
+export function Test({ words, category, level, isLastLevel, onBackToCards }: TestProps) {
+    const [testWords, setTestWords] = useState<CardData[]>(() => shuffleArray(words));
 
-    const [currentIndex, setCurrentIndex] =
-        useState(0);
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [correctAnswers, setCorrectAnswers] = useState(0);
 
-    const [
-        correctAnswers,
-        setCorrectAnswers,
-    ] = useState(0);
+    const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
 
-    const [
-        selectedAnswer,
-        setSelectedAnswer,
-    ] = useState<string | null>(null);
+    const [timeLeft, setTimeLeft] = useState(TEST_TIMER_SECONDS);
 
-    const [timeLeft, setTimeLeft] =
-        useState(15);
+    const [isTimeout, setIsTimeout] = useState(false);
+    const [isFinished, setIsFinished] = useState(false);
 
-    const [isTimeout, setIsTimeout] =
-        useState(false);
+    const currentWord = testWords[currentIndex];
 
-    const [isFinished, setIsFinished] =
-        useState(false);
+    const [answers, setAnswers] = useState<string[]>(() => {
+        const firstWord = testWords[0];
 
-    const currentWord =
-        testWords[currentIndex];
+        return firstWord ? generateAnswers(testWords, firstWord) : [];
+    });
 
-    const [answers, setAnswers] =
-        useState<string[]>(() => {
-            const firstWord =
-                testWords[0];
-
-            return firstWord
-                ? generateAnswers(
-                    testWords,
-                    firstWord,
-                )
-                : [];
-        });
-
-    const finishTest = (
-        finalCorrectAnswers: number,
-    ) => {
+    const finishTest = (finalCorrectAnswers: number) => {
         const percent =
-            testWords.length > 0
-                ? Math.round(
-                    (finalCorrectAnswers /
-                        testWords.length) *
-                    100,
-                )
-                : 0;
+            testWords.length > 0 ? Math.round((finalCorrectAnswers / testWords.length) * 100) : 0;
 
         const attempt: TestAttempt = {
             percent,
@@ -167,145 +94,84 @@ export function Test({
             date: new Date().toISOString(),
         };
 
-        saveStatistics(
-            category,
-            level,
-            attempt,
-        );
+        saveStatistics(category, level, attempt);
 
-        if (percent >= 85) {
-            unlockNextLevel(
-                category,
-                level,
-            );
+        if (percent >= PASS_PERCENT) {
+            unlockNextLevel(category, level);
         }
 
         setIsFinished(true);
     };
 
     const restartTest = () => {
-        const shuffledWords =
-            shuffleArray(words);
+        const shuffledWords = shuffleArray(words);
 
         setTestWords(shuffledWords);
-
         setCurrentIndex(0);
         setCorrectAnswers(0);
         setSelectedAnswer(null);
-        setTimeLeft(15);
+        setTimeLeft(TEST_TIMER_SECONDS);
         setIsTimeout(false);
         setIsFinished(false);
 
-        const firstWord =
-            shuffledWords[0];
+        const firstWord = shuffledWords[0];
 
-        setAnswers(
-            firstWord
-                ? generateAnswers(
-                    shuffledWords,
-                    firstWord,
-                )
-                : [],
-        );
+        setAnswers(firstWord ? generateAnswers(shuffledWords, firstWord) : []);
     };
 
     useEffect(() => {
-        if (
-            !currentWord ||
-            selectedAnswer !== null ||
-            isTimeout ||
-            isFinished
-        ) {
+        if (!currentWord || selectedAnswer !== null || isTimeout || isFinished) {
             return;
         }
 
-        const timerId =
-            window.setInterval(() => {
-                setTimeLeft(
-                    (previousTime) => {
-                        if (
-                            previousTime <= 1
-                        ) {
-                            window.clearInterval(
-                                timerId,
-                            );
+        const timerId = window.setInterval(() => {
+            setTimeLeft((previousTime) => {
+                if (previousTime <= 1) {
+                    window.clearInterval(timerId);
+                    setIsTimeout(true);
 
-                            setIsTimeout(
-                                true,
-                            );
+                    return 0;
+                }
 
-                            return 0;
-                        }
-
-                        return (
-                            previousTime - 1
-                        );
-                    },
-                );
-            }, 1000);
+                return previousTime - 1;
+            });
+        }, 1000);
 
         return () => {
             window.clearInterval(timerId);
         };
-    }, [
-        currentWord,
-        selectedAnswer,
-        isTimeout,
-        isFinished,
-    ]);
+    }, [currentWord, selectedAnswer, isTimeout, isFinished]);
 
-    if (
-        !currentWord &&
-        !isFinished
-    ) {
+    if (!currentWord && !isFinished) {
         return (
             <div className="test-area">
-                <p>
-                    Нет слов для тестирования
-                </p>
+                <p>Нет слов для тестирования</p>
             </div>
         );
     }
 
     if (isFinished) {
         const percent =
-            testWords.length > 0
-                ? Math.round(
-                    (correctAnswers /
-                        testWords.length) *
-                    100,
-                )
-                : 0;
+            testWords.length > 0 ? Math.round((correctAnswers / testWords.length) * 100) : 0;
 
-        const passed =
-            percent >= 85;
+        const passed = percent >= PASS_PERCENT;
 
         return (
             <div className="test-area">
                 <div className="test-result-card">
-                    <h3 className="test-result-title">
-                        Тест завершён
-                    </h3>
+                    <h3 className="test-result-title">Тест завершён</h3>
 
                     <div
                         className={
-                            passed
-                                ? "test-result-percent passed"
-                                : "test-result-percent failed"
+                            passed ? "test-result-percent passed" : "test-result-percent failed"
                         }
                     >
                         {percent}%
                     </div>
 
                     <p className="test-result-text">
-                        Правильных ответов:{" "}
-                        <strong>
-                            {correctAnswers}
-                        </strong>{" "}
-                        из{" "}
-                        <strong>
-                            {testWords.length}
-                        </strong>
+                        Правильных ответов: <strong>{correctAnswers}</strong> из{" "}
+                        <strong>{testWords.length}</strong>
                     </p>
 
                     {passed ? (
@@ -316,31 +182,17 @@ export function Test({
                         </p>
                     ) : (
                         <p className="test-result-message failed-message">
-                            Для открытия
-                            следующего уровня
-                            необходимо набрать
-                            минимум 85%.
+                            Для открытия следующего уровня необходимо набрать минимум {PASS_PERCENT}
+                            %.
                         </p>
                     )}
 
                     <div className="test-result-actions">
-                        <button
-                            type="button"
-                            className="styled-btn"
-                            onClick={
-                                restartTest
-                            }
-                        >
+                        <button type="button" className="styled-btn" onClick={restartTest}>
                             Пройти ещё раз
                         </button>
 
-                        <button
-                            type="button"
-                            className="styled-btn"
-                            onClick={
-                                onBackToCards
-                            }
-                        >
+                        <button type="button" className="styled-btn" onClick={onBackToCards}>
                             Вернуться к карточкам
                         </button>
                     </div>
@@ -349,103 +201,63 @@ export function Test({
         );
     }
 
-    const checkAnswer = (
-        answer: string,
-    ) => {
-        if (
-            selectedAnswer !== null ||
-            isTimeout
-        ) {
+    const checkAnswer = (answer: string) => {
+        if (selectedAnswer !== null || isTimeout) {
             return;
         }
 
         setSelectedAnswer(answer);
 
-        if (
-            answer ===
-            currentWord.russian
-        ) {
-            setCorrectAnswers(
-                (previous) =>
-                    previous + 1,
-            );
+        if (answer === currentWord.russian) {
+            setCorrectAnswers((previous) => previous + 1);
         }
     };
 
     const handleContinue = () => {
-        const nextIndex =
-            currentIndex + 1;
+        const nextIndex = currentIndex + 1;
 
-        const nextWord =
-            testWords[nextIndex];
+        const nextWord = testWords[nextIndex];
 
         if (!nextWord) {
-            finishTest(
-                correctAnswers,
-            );
+            finishTest(correctAnswers);
             return;
         }
 
-        setCurrentIndex(
-            nextIndex,
-        );
+        setCurrentIndex(nextIndex);
 
-        setAnswers(
-            generateAnswers(
-                testWords,
-                nextWord,
-            ),
-        );
+        setAnswers(generateAnswers(testWords, nextWord));
 
         setSelectedAnswer(null);
         setIsTimeout(false);
-        setTimeLeft(15);
+        setTimeLeft(TEST_TIMER_SECONDS);
     };
 
-    const answered =
-        selectedAnswer !== null ||
-        isTimeout;
+    const answered = selectedAnswer !== null || isTimeout;
 
-    const isCorrect =
-        selectedAnswer ===
-        currentWord.russian;
+    const isCorrect = selectedAnswer === currentWord.russian;
 
-    const getAnswerClass = (
-        answer: string,
-    ): string => {
+    const getAnswerClass = (answer: string): string => {
         if (!answered) {
             return "styled-btn answer-btn";
         }
 
-        if (
-            answer ===
-            currentWord.russian
-        ) {
+        if (answer === currentWord.russian) {
             return "styled-btn answer-btn correct-answer";
         }
 
-        if (
-            answer ===
-            selectedAnswer
-        ) {
+        if (answer === selectedAnswer) {
             return "styled-btn answer-btn wrong-answer";
         }
 
         return "styled-btn answer-btn";
     };
 
-    const progress =
-        testWords.length > 0
-            ? ((currentIndex + 1) /
-                testWords.length) *
-            100
-            : 0;
+    const progress = testWords.length > 0 ? ((currentIndex + 1) / testWords.length) * 100 : 0;
 
     return (
         <div className="test-area">
             <p className="question-number">
-                Вопрос {currentIndex + 1}{" "}
-                из {testWords.length}
+                Вопрос {currentIndex + 1} из {testWords.length}
             </p>
 
             <div className="progress-bar">
@@ -457,77 +269,46 @@ export function Test({
                 />
             </div>
 
-            <div
-                className={
-                    timeLeft <= 5
-                        ? "timer timer-warning"
-                        : "timer"
-                }
-            >
+            <div className={timeLeft <= TIMER_WARNING_SECONDS ? "timer timer-warning" : "timer"}>
                 ⌛ {timeLeft}
             </div>
 
-            <h3 className="test-word">
-                {currentWord.hebrew}
-            </h3>
+            <h3 className="test-word">{currentWord.hebrew}</h3>
 
             <div className="answers-container">
-                {answers.map(
-                    (answer) => (
-                        <button
-                            key={answer}
-                            type="button"
-                            className={getAnswerClass(
-                                answer,
-                            )}
-                            onClick={() =>
-                                checkAnswer(
-                                    answer,
-                                )
-                            }
-                            disabled={
-                                answered
-                            }
-                        >
-                            {answer}
-                        </button>
-                    ),
-                )}
+                {answers.map((answer) => (
+                    <button
+                        key={answer}
+                        type="button"
+                        className={getAnswerClass(answer)}
+                        onClick={() => checkAnswer(answer)}
+                        disabled={answered}
+                    >
+                        {answer}
+                    </button>
+                ))}
             </div>
 
             {answered && (
                 <div className="answer-result">
                     {isTimeout ? (
-                        <div className="wrong">
-                            Время вышло!
-                        </div>
+                        <div className="wrong">Время вышло!</div>
                     ) : isCorrect ? (
-                        <div className="correct">
-                            Верно!
-                        </div>
+                        <div className="correct">Верно!</div>
                     ) : (
-                        <div className="wrong">
-                            Неверно!
-                        </div>
+                        <div className="wrong">Неверно!</div>
                     )}
 
                     {!isCorrect && (
                         <p className="correct-answer-text">
-                            Правильный ответ:{" "}
-                            <strong>
-                                {
-                                    currentWord.russian
-                                }
-                            </strong>
+                            Правильный ответ: <strong>{currentWord.russian}</strong>
                         </p>
                     )}
 
                     <button
                         type="button"
                         className="styled-btn continue-btn"
-                        onClick={
-                            handleContinue
-                        }
+                        onClick={handleContinue}
                     >
                         Продолжить →
                     </button>
